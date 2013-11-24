@@ -40,7 +40,7 @@ In this case, it will depend on `react`.
     getMoreItems={loadFunc}
     hasMoreItems={true || false}
     loader={{component:React.DOM.div, props:{className:'loader'}, children:'Loading ...'}}>
-  {items} // <-- This is an array of the "stuff" you want to load
+  {items} // <-- This is the "stuff" you want to load
 </InfiniteScroll>
 ```
 
