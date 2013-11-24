@@ -44,6 +44,9 @@ In this case, it will depend on `react`.
 </InfiniteScroll>
 ```
 
+- `pageStart` : The page number corresponding to the initial `items`, defaults to `0`
+                which means that for the first loading, `getMoreItems` will be called with `1`
+
 - `getMoreItems(pageToLoad)` : This function is called when the user scrolls down
                                and we need to load stuff
 
