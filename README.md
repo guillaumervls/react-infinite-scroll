@@ -37,20 +37,20 @@ In this case, it will depend on `react`.
 ```html
 <InfiniteScroll 
     pageStart=0
-    getMoreItems={loadFunc}
-    hasMoreItems={true || false}
+    loadMore={loadFunc}
+    hasMore={true || false}
     loader={{component:React.DOM.div, props:{className:'loader'}, children:'Loading ...'}}>
   {items} // <-- This is the "stuff" you want to load
 </InfiniteScroll>
 ```
 
 - `pageStart` : The page number corresponding to the initial `items`, defaults to `0`
-                which means that for the first loading, `getMoreItems` will be called with `1`
+                which means that for the first loading, `loadMore` will be called with `1`
 
-- `getMoreItems(pageToLoad)` : This function is called when the user scrolls down
+- `loadMore(pageToLoad)` : This function is called when the user scrolls down
                                and we need to load stuff
 
-- `hasMoreItems` : Boolean stating if we should keep listening to scroll event and
+- `hasMore` : Boolean stating if we should keep listening to scroll event and
                    trying to load more stuff
 
 - `loader` : Loader element to be displayed while loading stuff, can be provided as :

@@ -6,15 +6,41 @@
 <body>
 </body>
 <script>
-  var infiniteScroll = React.addons.InfiniteScroll({
-    loader: {
-      component: React.DOM.div,
-      props: {
-        className: 'loader'
-      },
-      children: 'Loading ...'
+  var Wrapper = React.createClass({
+    getInitialState: function () {
+      return {
+        hasMore: true,
+        items: 'Hello '
+      };
+    },
+    loadMore: function () {
+      console.log('load');
+      setTimeout(function () {
+        this.setState({
+          items: this.state.items += 'Hello ',
+          hasMore: window.noMore ? false : true
+        });
+      }.bind(this), 1000);
+    },
+    render: function () {
+      console.log('render');
+      return React.addons.InfiniteScroll({
+        loader: {
+          component: React.DOM.div,
+          props: {
+            className: 'loader'
+          },
+          children: 'Loading ...'
+        },
+        loadMore: this.loadMore,
+        hasMore: this.state.hasMore
+      }, React.DOM.div({
+        style: {
+          width: '50px'
+        }
+      }, this.state.items));
     }
-  }, React.DOM.div(null, 'coucou'));
-  React.renderComponent(infiniteScroll, document.body);
-  </script>
+  });
+  React.renderComponent(Wrapper(), document.body);
+</script>
 </html>

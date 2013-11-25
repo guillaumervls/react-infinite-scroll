@@ -1,6 +1,6 @@
 {
   "name": "react-infinite-scroll",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "src/react-infinite-scroll.js",
   "scripts": {
