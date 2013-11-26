@@ -1,7 +1,7 @@
 React Infinite Scroll
 =====================
 
-**React infinite scroll component.**
+*React infinite scroll component*
 
 # Getting started
 
@@ -58,6 +58,10 @@ In this case, it will depend on `react`.
     * an component consrtuctor : i.e. `React.DOM.div` (or a component of yours)
     * an object, for more customization :
     `{component:React.DOM.div, props:{className:'loader'}, children:'Loading ...'}`
+
+- `threshold` : The distance between the bottom of the page and the bottom of the 
+                window's viewport that triggers the loading of new stuff - 
+                *Defaults to `250`*
 
 
 ## (Re)build

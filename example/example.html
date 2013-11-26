@@ -2,23 +2,34 @@
 <head>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.5.1/react.js"></script>
   <script src="../dist/react-infinite-scroll.min.js"></script>
+  <style>
+    .samplePage {
+      font-size: 36px;
+      line-height: 96px;
+    }
+  </style>
 </head>
 <body>
 </body>
 <script>
+  function createDiv(page) {
+    return React.DOM.div({
+      className: 'samplePage'
+    }, 'Hello page ' + page + ' !');
+  }
   var Wrapper = React.createClass({
     getInitialState: function () {
       return {
         hasMore: true,
-        items: 'Hello '
+        items: [createDiv(0)]
       };
     },
-    loadMore: function () {
+    loadMore: function (page) {
       console.log('load');
       setTimeout(function () {
         this.setState({
-          items: this.state.items += 'Hello ',
-          hasMore: window.noMore ? false : true
+          items: this.state.items.concat([createDiv(page)]),
+          hasMore: (page < 15)
         });
       }.bind(this), 1000);
     },
@@ -34,11 +45,7 @@
         },
         loadMore: this.loadMore,
         hasMore: this.state.hasMore
-      }, React.DOM.div({
-        style: {
-          width: '50px'
-        }
-      }, this.state.items));
+      }, React.DOM.div.apply(null, [null].concat(this.state.items)));
     }
   });
   React.renderComponent(Wrapper(), document.body);

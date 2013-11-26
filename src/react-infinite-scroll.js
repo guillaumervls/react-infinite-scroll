@@ -1,10 +1,15 @@
 module.exports = function (React) {
   return React.createClass({
-    getInitialState: function () {
-      this.pageLoaded = this.props.pageStart || 0;
+    getDefaultProps: function () {
       return {
-        pageLoaded: this.props.pageStart || 0
+        pageStart: 0,
+        hasMore: false,
+        loadMore: function () {},
+        loader: React.DOM.span
       };
+    },
+    getInitialState: function () {
+      this.pageLoaded = this.props.pageStart;
     },
     componentDidMount: function () {
       this.attachScrollListener();
@@ -19,8 +24,6 @@ module.exports = function (React) {
         loaderElmt = loaderProp();
       } else if (typeof loaderProp === 'object') {
         loaderElmt = loaderProp.component(loaderProp.props, loaderProp.children);
-      } else {
-        loaderElmt = React.DOM.span();
       }
       return React.DOM.div(null, this.props.children, this.props.hasMore && loaderElmt);
     },
