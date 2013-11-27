@@ -5,7 +5,8 @@ module.exports = function (React) {
         pageStart: 0,
         hasMore: false,
         loadMore: function () {},
-        loader: React.DOM.span
+        loader: React.DOM.span,
+        threshold: 250
       };
     },
     getInitialState: function () {
@@ -28,7 +29,7 @@ module.exports = function (React) {
       return React.DOM.div(null, this.props.children, this.props.hasMore && loaderElmt);
     },
     scrollListener: function () {
-      if (document.body.offsetHeight - document.body.scrollTop - window.innerHeight < 250) {
+      if (document.body.offsetHeight - document.body.scrollTop - window.innerHeight < Number(this.props.threshold)) {
         this.props.loadMore(this.pageLoaded += 1);
         this.detachScrollListener();
       }
