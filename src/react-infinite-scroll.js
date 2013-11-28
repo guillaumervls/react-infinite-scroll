@@ -1,5 +1,9 @@
 module.exports = function (React) {
-  return React.createClass({
+  if (React.addons && React.addons.InfiniteScroll) {
+    return React.addons.InfiniteScroll;
+  }
+  React.addons = React.addons || {};
+  React.addons.InfiniteScroll = React.createClass({
     getDefaultProps: function () {
       return {
         pageStart: 0,
@@ -45,4 +49,5 @@ module.exports = function (React) {
       window.removeEventListener('scroll', this.scrollListener);
     }
   });
+  return React.addons.InfiniteScroll;
 };
