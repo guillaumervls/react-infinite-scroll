@@ -47,6 +47,9 @@ module.exports = function (React) {
     },
     detachScrollListener: function () {
       window.removeEventListener('scroll', this.scrollListener);
+    },
+    componentWillUnmount: function () {
+      this.detachScrollListener();
     }
   });
   return React.addons.InfiniteScroll;
