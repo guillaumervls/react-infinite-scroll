@@ -1,3 +1,10 @@
+function topPosition(domElt) {
+  if (!domElt) {
+    return 0;
+  }
+  return domElt.offsetTop + topPosition(domElt.offsetParent);
+}
+
 module.exports = function (React) {
   if (React.addons && React.addons.InfiniteScroll) {
     return React.addons.InfiniteScroll;
@@ -33,7 +40,8 @@ module.exports = function (React) {
       return React.DOM.div(null, this.props.children, this.props.hasMore && loaderElmt);
     },
     scrollListener: function () {
-      if (document.body.offsetHeight - document.body.scrollTop - window.innerHeight < Number(this.props.threshold)) {
+      var el = this.getDOMNode();
+      if (topPosition(el) + el.offsetHeight - document.body.scrollTop - window.innerHeight < Number(this.props.threshold)) {
         this.props.loadMore(this.pageLoaded += 1);
         this.detachScrollListener();
       }
