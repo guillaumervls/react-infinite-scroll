@@ -3,6 +3,8 @@ React Infinite Scroll
 
 *React infinite scroll component*
 
+Demo: http://jsfiddle.net/mb9vJ/
+
 # Getting started
 
 ### Classic :
