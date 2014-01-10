@@ -16,7 +16,6 @@ module.exports = function (React) {
         pageStart: 0,
         hasMore: false,
         loadMore: function () {},
-        loader: React.DOM.span,
         threshold: 250
       };
     },
@@ -30,14 +29,8 @@ module.exports = function (React) {
       this.attachScrollListener();
     },
     render: function () {
-      var loaderProp = this.props.loader,
-        loaderElmt;
-      if (typeof loaderProp === 'function') {
-        loaderElmt = loaderProp();
-      } else if (typeof loaderProp === 'object') {
-        loaderElmt = loaderProp.component(loaderProp.props, loaderProp.children);
-      }
-      return React.DOM.div(null, this.props.children, this.props.hasMore && loaderElmt);
+      var props = this.props;
+      return React.DOM.div(null, props.children, props.hasMore && props.loader);
     },
     scrollListener: function () {
       var el = this.getDOMNode();

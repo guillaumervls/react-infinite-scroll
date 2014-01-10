@@ -36,13 +36,9 @@
     render: function () {
       console.log('render');
       return React.addons.InfiniteScroll({
-        loader: {
-          component: React.DOM.div,
-          props: {
+        loader: React.DOM.div({
             className: 'loader'
-          },
-          children: 'Loading ...'
-        },
+          }, 'Loading...'),
         loadMore: this.loadMore,
         hasMore: this.state.hasMore
       }, React.DOM.div.apply(null, [null].concat(this.state.items)));
@@ -50,4 +46,4 @@
   });
   React.renderComponent(Wrapper(), document.body);
 </script>
-</html>
+</html >

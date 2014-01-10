@@ -3,7 +3,7 @@ React Infinite Scroll
 
 *React infinite scroll component*
 
-Demo: http://jsfiddle.net/mb9vJ/
+Demo: http://jsfiddle.net/mb9vJ/1
 
 # Getting started
 
@@ -50,20 +50,24 @@ In this case, it will depend on `react`.
                 which means that for the first loading, `loadMore` will be called with `1`
 
 - `loadMore(pageToLoad)` : This function is called when the user scrolls down
-                               and we need to load stuff
+                           and we need to load stuff
 
 - `hasMore` : Boolean stating if we should keep listening to scroll event and
-                   trying to load more stuff
+              trying to load more stuff
 
-- `loader` : Loader element to be displayed while loading stuff, can be provided as :
-
-    * an component consrtuctor : i.e. `React.DOM.div` (or a component of yours)
-    * an object, for more customization :
-    `{component:React.DOM.div, props:{className:'loader'}, children:'Loading ...'}`
+- `loader` : Loader element to be displayed while loading stuff
 
 - `threshold` : The distance between the bottom of the page and the bottom of the 
                 window's viewport that triggers the loading of new stuff - 
                 *Defaults to `250`*
+
+
+## Changelog
+
+### v0.1.0
+
+`loader` now takes a React component
+(no more component constructor or object `{component:... , props:... , ...}`).
 
 
 ## (Re)build
