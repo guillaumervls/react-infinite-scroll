@@ -34,7 +34,7 @@ module.exports = function (React) {
     },
     scrollListener: function () {
       var el = this.getDOMNode();
-      if (topPosition(el) + el.offsetHeight - (document.documentElement || document.body.parentNode || document.body).scrollTop - window.innerHeight < Number(this.props.threshold)) {
+      if (topPosition(el) + el.offsetHeight - (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop - window.innerHeight < Number(this.props.threshold)) {
         this.props.loadMore(this.pageLoaded += 1);
         this.detachScrollListener();
       }
