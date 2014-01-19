@@ -41,7 +41,7 @@ In this case, it will depend on `react`.
     pageStart=0
     loadMore={loadFunc}
     hasMore={true || false}
-    loader={{component:React.DOM.div, props:{className:'loader'}, children:'Loading ...'}}>
+    loader={<div className="loader">Loading ...</div>}>
   {items} // <-- This is the "stuff" you want to load
 </InfiniteScroll>
 ```
