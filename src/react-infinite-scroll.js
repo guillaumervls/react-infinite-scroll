@@ -21,7 +21,9 @@ module.exports = function (React) {
       };
     },
     getInitialState: function () {
-      this.pageLoaded = this.props.pageStart;
+      return {
+        pageLoaded: this.props.pageStart
+      };
     },
     componentDidMount: function () {
       this.attachScrollListener();
@@ -37,7 +39,7 @@ module.exports = function (React) {
       var el = this.getDOMNode();
       var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
       if (topPosition(el) + el.offsetHeight - scrollTop - window.innerHeight < Number(this.props.threshold)) {
-        this.props.loadMore(this.pageLoaded += 1);
+        this.props.loadMore(this.state.pageLoaded += 1);
         this.detachScrollListener();
       }
     },
