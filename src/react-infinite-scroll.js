@@ -20,10 +20,8 @@ module.exports = function (React) {
         loader: InfiniteScroll._defaultLoader
       };
     },
-    getInitialState: function () {
-      this.pageLoaded = this.props.pageStart;
-    },
     componentDidMount: function () {
+      this.pageLoaded = this.props.pageStart;
       this.attachScrollListener();
     },
     componentDidUpdate: function () {
