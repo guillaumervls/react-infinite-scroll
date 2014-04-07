@@ -36,7 +36,14 @@ module.exports = function (React) {
       var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
       if (topPosition(el) + el.offsetHeight - scrollTop - window.innerHeight < Number(this.props.threshold)) {
         this.props.loadMore(this.pageLoaded += 1);
-        this.detachScrollListener();
+        // if we assume the user will make the loadMore function async
+        // with a timeout or an http request, we don't need to check
+        // this.props.hasMore, but if all the data is returned immediately
+        // and we don't check this, all scroll listeners will be removed at
+        // this point and never come back
+        if (!this.props.hasMore) {
+          this.detachScrollListener();
+        }
       }
     },
     attachScrollListener: function () {
