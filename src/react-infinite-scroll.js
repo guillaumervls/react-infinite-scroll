@@ -44,10 +44,12 @@ module.exports = function (React) {
         return;
       }
       window.addEventListener('scroll', this.scrollListener);
+      window.addEventListener('resize', this.scrollListener);
       this.scrollListener();
     },
     detachScrollListener: function () {
       window.removeEventListener('scroll', this.scrollListener);
+      window.removeEventListener('resize', this.scrollListener);
     },
     componentWillUnmount: function () {
       this.detachScrollListener();
