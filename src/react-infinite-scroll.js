@@ -35,8 +35,10 @@ module.exports = function (React) {
       var el = this.getDOMNode();
       var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
       if (topPosition(el) + el.offsetHeight - scrollTop - window.innerHeight < Number(this.props.threshold)) {
-        this.props.loadMore(this.pageLoaded += 1);
         this.detachScrollListener();
+        // call loadMore after detachScrollListener to allow
+        // for non-async loadMore functions
+        this.props.loadMore(this.pageLoaded += 1);
       }
     },
     attachScrollListener: function () {
@@ -44,10 +46,12 @@ module.exports = function (React) {
         return;
       }
       window.addEventListener('scroll', this.scrollListener);
+      window.addEventListener('resize', this.scrollListener);
       this.scrollListener();
     },
     detachScrollListener: function () {
       window.removeEventListener('scroll', this.scrollListener);
+      window.removeEventListener('resize', this.scrollListener);
     },
     componentWillUnmount: function () {
       this.detachScrollListener();
