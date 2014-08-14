@@ -21,7 +21,6 @@ module.exports = function (React) {
       };
     },
     componentDidMount: function () {
-      this.pageLoaded = this.props.pageStart;
       this.attachScrollListener();
     },
     componentDidUpdate: function () {
@@ -38,7 +37,7 @@ module.exports = function (React) {
         this.detachScrollListener();
         // call loadMore after detachScrollListener to allow
         // for non-async loadMore functions
-        this.props.loadMore(this.pageLoaded += 1);
+        this.props.loadMore(this.props.pageStart += 1);
       }
     },
     attachScrollListener: function () {
