@@ -2,7 +2,7 @@ Add refresher inspired by http://ionicframework.com/docs/api/directive/ionRefres
 
 InfiniteScroll can refresh(every 6 second refresh turnon/off) on scroll top and load on scroll bottom position, see example.html
 
-Also this fork use webpack to manage packages 
+Also this fork use [webpack](http://webpack.github.io/) to manage packages 
 
 ##How to Use It
 
