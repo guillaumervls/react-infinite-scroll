@@ -16,8 +16,7 @@ module.exports = function (React) {
         pageStart: 0,
         hasMore: false,
         loadMore: function () {},
-        threshold: 250,
-        loader: InfiniteScroll._defaultLoader
+        threshold: 250
       };
     },
     componentDidMount: function () {
@@ -29,7 +28,7 @@ module.exports = function (React) {
     },
     render: function () {
       var props = this.props;
-      return React.DOM.div(null, props.children, props.hasMore && props.loader);
+      return React.DOM.div(null, props.children, props.hasMore && (props.loader || InfiniteScroll._defaultLoader));
     },
     scrollListener: function () {
       var el = this.getDOMNode();
