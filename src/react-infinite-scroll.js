@@ -34,8 +34,8 @@ module.exports = function (React) {
     scrollListener: function () {
       var el = this.getDOMNode();
       var scrollTop;
-      if(this.props.domViewport == window) {
-        scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;  
+      if(this.props.domViewport === window) {
+        scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
       } else {
         scrollTop = this.props.domViewport.scrollTop;
       }
