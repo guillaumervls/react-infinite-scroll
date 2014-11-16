@@ -37,11 +37,14 @@ In this case, it will depend on `react`.
 # Use in JSX
 
 ```html
+  var domEl = document.querySelector('#scrollEl');
+
 <InfiniteScroll
     pageStart=0
     loadMore={loadFunc}
     hasMore={true || false}
     loader={<div className="loader">Loading ...</div>}>
+    domViewport={domEl}
   {items} // <-- This is the "stuff" you want to load
 </InfiniteScroll>
 ```
@@ -62,6 +65,9 @@ In this case, it will depend on `react`.
 - `threshold` : The distance between the bottom of the page and the bottom of the
                 window's viewport that triggers the loading of new stuff -
                 *Defaults to `250`*
+- `domViewport` : Dom element which is the scroll contianer (viewport),  
+                *Defaults to window *
+
 
 
 ## Changelog
