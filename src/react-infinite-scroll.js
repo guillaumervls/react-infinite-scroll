@@ -11,11 +11,17 @@ module.exports = function (React) {
   }
   React.addons = React.addons || {};
   var InfiniteScroll = React.addons.InfiniteScroll = React.createClass({
+    displayName: 'InfiniteScroll',
+    propTypes: {
+      pageStart: React.PropTypes.number,
+      threshold: React.PropTypes.number,
+      loadMore: React.PropTypes.func.isRequired,
+      hasMore: React.PropTypes.bool
+    },
     getDefaultProps: function () {
       return {
         pageStart: 0,
         hasMore: false,
-        loadMore: function () {},
         threshold: 250
       };
     },
