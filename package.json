@@ -1,11 +1,10 @@
 {
   "name": "react-infinite-scroll-webpack",
-  "version": "0.0.3",
+  "version": "0.0.0",
   "src": "src",
   "test": "test",
   "dist": "dist",
-  "mainInput": "WebpackApp",
-  "mainOutput": "main",
+  "main":"dist/scripts/infinitescroll.js",
   "postinstall": "gulp build",
   "dependencies": {
     "gulp": "^3.8.10",
