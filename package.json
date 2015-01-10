@@ -1,13 +1,25 @@
 {
-  "name": "webpack",
-  "version": "0.0.0",
+  "name": "react-infinite-scroll-webpack",
+  "version": "0.0.3",
   "src": "src",
   "test": "test",
   "dist": "dist",
   "mainInput": "WebpackApp",
   "mainOutput": "main",
+  "postinstall": "gulp build",
   "dependencies": {
-    "react": "~0.10.0"
+    "gulp": "^3.8.10",
+    "gulp-bump": "^0.1.11",
+    "gulp-clean": "^0.3.1",
+    "gulp-filter": "^2.0.0",
+    "gulp-git": "^0.5.5",
+    "gulp-ignore": "^1.2.1",
+    "gulp-print": "^1.1.0",
+    "gulp-prompt": "^0.1.1",
+    "gulp-tag-version": "^1.2.1",
+    "gulp-util": "^3.0.2",
+    "react": "~0.10.0",
+    "run-sequence": "^1.0.2"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
@@ -26,7 +38,6 @@
     "karma-phantomjs-launcher": "~0.1.1",
     "karma": "~0.10.9",
     "grunt-karma": "~0.6.2",
-    "karma-webpack-plugin": "~1.0.0",
     "webpack-dev-server": "~1.2.4",
     "grunt-open": "~0.2.3",
     "jshint-loader": "~0.6.0",
