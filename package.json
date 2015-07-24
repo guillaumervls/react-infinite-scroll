@@ -27,5 +27,8 @@
     "grunt-contrib-clean": "~0.5.0",
     "browserify": "~2.35.0",
     "grunt-browserify": "~1.2.9"
+  },
+  "dependencies": {
+    "deep-equal": "^1.0.0"
   }
 }
