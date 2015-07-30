@@ -24,6 +24,7 @@ module.exports = function (React) {
       this.attachScrollListener();
     },
     componentDidUpdate: function () {
+      this.pageLoaded = this.props.pageStart;
       this.attachScrollListener();
     },
     render: function () {
