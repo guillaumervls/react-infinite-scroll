@@ -38,7 +38,7 @@ In this case, it will depend on `react`.
 
 ```html
 <InfiniteScroll
-    pageStart=0
+    pageStart={0}
     loadMore={loadFunc}
     hasMore={true || false}
     loader={<div className="loader">Loading ...</div>}>
