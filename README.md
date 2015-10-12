@@ -26,7 +26,7 @@ Install : `npm install react-infinite-scroll`
 
 Then :
 ```javascript
-InfiniteScroll = require('react-infinite-scroll')(React);
+InfiniteScroll = require('react-infinite-scroll')(React, ReactDOM);
 ```
 
 ### Also works with AMD (e.g [RequireJS](http://requirejs.org))
