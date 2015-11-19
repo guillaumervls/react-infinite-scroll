@@ -26,6 +26,9 @@ module.exports = function (React) {
     componentDidUpdate: function () {
       this.attachScrollListener();
     },
+    reset: function() {
+      this.pageLoaded = this.props.pageStart;
+    },
     render: function () {
       var props = this.props;
       return React.DOM.div(null, props.children, props.hasMore && (props.loader || InfiniteScroll._defaultLoader));
