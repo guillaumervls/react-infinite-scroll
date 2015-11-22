@@ -24,7 +24,22 @@ module.exports = function (React) {
       this.attachScrollListener();
     },
     componentDidUpdate: function () {
-      this.attachScrollListener();
+      // this.attachScrollListener();
+    },
+    componentWillReceiveProps: function (nextProps) {
+      // Attach if new children
+      if (this.props.children.props.children && nextProps.children.props.children &&
+        (this.props.children.props.children.length != nextProps.children.props.children.length)) {
+        var _this = this;
+        setTimeout(function(){
+          _this.attachScrollListener();
+        }, 250);
+      }
+      // Attach if availability change
+      if (this.props.hasMore != nextProps.hasMore) {
+        // Pass next props to evaluate before props get it
+        this.attachScrollListener(nextProps);
+      }
     },
     reset: function() {
       this.pageLoaded = this.props.pageStart;
@@ -43,8 +58,9 @@ module.exports = function (React) {
         this.props.loadMore(this.pageLoaded += 1);
       }
     },
-    attachScrollListener: function () {
-      if (!this.props.hasMore) {
+    attachScrollListener: function (nextProps) {
+      const hasMore = this.props.hasMore || (nextProps && nextProps.hasMore);
+      if (!hasMore) {
         return;
       }
       window.addEventListener('scroll', this.scrollListener);
