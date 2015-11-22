@@ -29,14 +29,14 @@ module.exports = function (React) {
     componentWillReceiveProps: function (nextProps) {
       // Attach if new children
       if (this.props.children.props.children && nextProps.children.props.children &&
-        (this.props.children.props.children.length != nextProps.children.props.children.length)) {
+        (this.props.children.props.children.length !== nextProps.children.props.children.length)) {
         var _this = this;
         setTimeout(function(){
           _this.attachScrollListener();
         }, 250);
       }
       // Attach if availability change
-      if (this.props.hasMore != nextProps.hasMore) {
+      if (this.props.hasMore !== nextProps.hasMore) {
         // Pass next props to evaluate before props get it
         this.attachScrollListener(nextProps);
       }
@@ -59,7 +59,7 @@ module.exports = function (React) {
       }
     },
     attachScrollListener: function (nextProps) {
-      const hasMore = this.props.hasMore || (nextProps && nextProps.hasMore);
+      var hasMore = this.props.hasMore || (nextProps && nextProps.hasMore);
       if (!hasMore) {
         return;
       }
