@@ -21,7 +21,7 @@ Then :
 ```
 
 ### [Browserify](https://github.com/substack/node-browserify) :
-̀
+
 Install : `npm install react-infinite-scroll`
 
 Then :
