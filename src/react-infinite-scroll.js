@@ -32,8 +32,16 @@ module.exports = function (React) {
     },
     scrollListener: function () {
       var el = this.getDOMNode();
-      var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-      if (topPosition(el) + el.offsetHeight - scrollTop - window.innerHeight < Number(this.props.threshold)) {
+      var scrollEl = window;
+
+      var scrollTop = (scrollEl.pageYOffset !== undefined) ? scrollEl.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+      var offset = topPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
+      if(this.props.useWindow == false) {
+        scrollEl = el.parentNode;
+        offset = el.getBoundingClientRect().top + el.offsetHeight - el.parentNode.clientHeight;
+      }
+
+      if (offset < Number(this.props.threshold)) {
         this.detachScrollListener();
         // call loadMore after detachScrollListener to allow
         // for non-async loadMore functions
@@ -44,13 +52,24 @@ module.exports = function (React) {
       if (!this.props.hasMore) {
         return;
       }
-      window.addEventListener('scroll', this.scrollListener);
-      window.addEventListener('resize', this.scrollListener);
+
+      var scrollEl = window;
+      if(this.props.useWindow == false) {
+        scrollEl = this.getDOMNode().parentNode;
+      }
+
+      scrollEl.addEventListener('scroll', this.scrollListener);
+      scrollEl.addEventListener('resize', this.scrollListener);
       this.scrollListener();
     },
     detachScrollListener: function () {
-      window.removeEventListener('scroll', this.scrollListener);
-      window.removeEventListener('resize', this.scrollListener);
+      var scrollEl = window;
+      if(this.props.useWindow == false) {
+        scrollEl = this.getDOMNode().parentNode;
+      }
+
+      scrollEl.removeEventListener('scroll', this.scrollListener);
+      scrollEl.removeEventListener('resize', this.scrollListener);
     },
     componentWillUnmount: function () {
       this.detachScrollListener();
