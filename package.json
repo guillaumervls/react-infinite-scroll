@@ -1,31 +1,24 @@
 {
-  "name": "react-infinite-scroll",
-  "version": "0.1.5",
-  "description": "",
+  "name": "react-infinite-scroller",
+  "version": "0.2.0",
+  "description": "Infinite scroll component for React 14.x in ES6",
   "main": "src/react-infinite-scroll.js",
-  "scripts": {
-    "test": "grunt lint"
-  },
   "repository": {
     "type": "git",
-    "url": "git://github.com/guillaumervls/react-infinite-scroll.git"
+    "url": "git://github.com/CassetteRocks/react-infinite-scroll.git"
   },
   "keywords": [
     "infinite",
     "scroll",
     "react"
   ],
-  "author": "guillaumervls",
+  "author": "CassetteRocks",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/guillaumervls/react-infinite-scroll/issues"
+    "url": "https://github.com/CassetteRocks/react-infinite-scroll/issues"
   },
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.7.0",
-    "grunt-contrib-uglify": "~0.2.4",
-    "grunt-contrib-clean": "~0.5.0",
-    "browserify": "~2.35.0",
-    "grunt-browserify": "~1.2.9"
+  "dependencies": {
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
   }
 }
