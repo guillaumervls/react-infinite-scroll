@@ -9,7 +9,7 @@ Infinitely load content using a React Component. This fork maintains a simple, l
 
 ## Version
 
-0.2.1 for React 14.7
+0.2.2 for React 14.7
 
 ## Installation
 
