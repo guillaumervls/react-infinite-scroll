@@ -2,14 +2,11 @@ React Infinite Scroller
 =======================
 
 [![npm](https://img.shields.io/npm/dt/react-infinite-scroller.svg?style=flat-square)]()
+[![React Version](https://img.shields.io/badge/React-14.7-blue.svg?style=flat-square)]()
 [![npm](https://img.shields.io/npm/v/react-infinite-scroller.svg?style=flat-square)]()
 [![npm](https://img.shields.io/npm/l/react-infinite-scroller.svg?style=flat-square)]()
 
 Infinitely load content using a React Component. This fork maintains a simple, lightweight infinite scroll package that supports both `window` and scrollable elements.
-
-## Version
-
-0.2.1 for React 14.7
 
 ## Installation
 
