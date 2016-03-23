@@ -52,6 +52,7 @@ var InfiniteScroll = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
+      this.pageLoaded = this.props.pageStart;
       this.attachScrollListener();
     }
   }, {
