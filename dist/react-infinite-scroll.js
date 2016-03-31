@@ -140,3 +140,4 @@ InfiniteScroll.defaultProps = {
   threshold: 250,
   useWindow: true
 };
+module.exports = exports['default'];
