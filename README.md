@@ -26,7 +26,7 @@ The module supports ES6 imports with `jsnext:main` and require with `main` in th
 
 ```html
   <InfiniteScroll
-      pageStart=0
+      pageStart={0}
       loadMore={loadFunc}
       hasMore={true || false}
       loader={<div className="loader">Loading ...</div>}>
@@ -36,10 +36,10 @@ The module supports ES6 imports with `jsnext:main` and require with `main` in th
 
 ### DOM scroll events
 
-```
+```html
   <div style="height:700px;overflow:auto;">
     <InfiniteScroll
-        pageStart=0
+        pageStart={0}
         loadMore={loadFunc}
         hasMore={true || false}
         loader={<div className="loader">Loading ...</div>}
