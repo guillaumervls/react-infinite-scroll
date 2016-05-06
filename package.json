@@ -1,7 +1,7 @@
 {
   "name": "react-infinite-scroller",
-  "version": "0.2.4",
-  "description": "Infinite scroll component for React 14.x in ES6",
+  "version": "0.2.5",
+  "description": "Infinite scroll component for React 15.x in ES6",
   "main": "dist/react-infinite-scroll.js",
   "jsnext:main": "src/react-infinite-scroll.js",
   "repository": {
@@ -29,11 +29,11 @@
     "babel-preset-react": "^6.5.0",
     "i": "^0.3.4",
     "npm": "^3.8.3",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2"
   },
   "peerDependencies": {
-    "react": "^0.14.x",
-    "react-dom": "^0.14.x"
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2"
   }
 }

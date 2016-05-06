@@ -1,10 +1,10 @@
 React Infinite Scroller
 =======================
 
-[![npm](https://img.shields.io/npm/dt/react-infinite-scroller.svg?style=flat-square)]()
-[![React Version](https://img.shields.io/badge/React-14.7-blue.svg?style=flat-square)]()
-[![npm](https://img.shields.io/npm/v/react-infinite-scroller.svg?style=flat-square)]()
-[![npm](https://img.shields.io/npm/l/react-infinite-scroller.svg?style=flat-square)]()
+[![npm](https://img.shields.io/npm/dt/react-infinite-scroller.svg?style=flat-square)](https://www.npmjs.com/package/react-infinite-scroller)
+[![React Version](https://img.shields.io/badge/React-15.0.2-blue.svg?style=flat-square)](https://www.npmjs.com/package/react)
+[![npm](https://img.shields.io/npm/v/react-infinite-scroller.svg?style=flat-square)](https://www.npmjs.com/package/react-infinite-scroller)
+[![npm](https://img.shields.io/npm/l/react-infinite-scroller.svg?style=flat-square)](https://github.com/CassetteRocks/react-infinite-scroller/blob/master/LICENSE)
 
 Infinitely load content using a React Component. This fork maintains a simple, lightweight infinite scroll package that supports both `window` and scrollable elements.
 
