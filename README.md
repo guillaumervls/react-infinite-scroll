@@ -1,9 +1,13 @@
 React Infinite Scroll
 =====================
 
-*React infinite scroll component*
 
-Demo: http://jsfiddle.net/mb9vJ/2
+[![npm](https://img.shields.io/npm/dt/react-infinite-scroll.svg?style=flat-square)](https://www.npmjs.com/package/react-infinite-scroll)
+[![React Version](https://img.shields.io/badge/React-15.0.2-blue.svg?style=flat-square)](https://www.npmjs.com/package/react)
+[![npm](https://img.shields.io/npm/v/react-infinite-scroll.svg?style=flat-square)](https://www.npmjs.com/package/react-infinite-scroll)
+[![npm](https://img.shields.io/npm/l/react-infinite-scroll.svg?style=flat-square)](https://github.com/CassetteRocks/react-infinite-scroll/blob/master/LICENSE)
+
+*React infinite scroll component*
 
 # Getting started
 
@@ -22,11 +26,11 @@ Then :
 
 ### [Browserify](https://github.com/substack/node-browserify) :
 ̀
-Install : `npm install react-infinite-scroll`
+Install : `npm install --save react-infinite-scroll`
 
 Then :
 ```javascript
-InfiniteScroll = require('react-infinite-scroll')(React);
+import InfiniteScroll from 'react-infinite-scroll'
 ```
 
 ### Also works with AMD (e.g [RequireJS](http://requirejs.org))
@@ -65,6 +69,11 @@ In this case, it will depend on `react`.
 
 
 ## Changelog
+
+### v0.1.6
+
+- Compatibility issues with react > 0.13 fixed
+- Syntax changed to es6
 
 ### v0.1.0
 
