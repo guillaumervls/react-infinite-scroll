@@ -9,7 +9,9 @@ function topPosition(domElt) {
 }
 
 export default class InfiniteScroll extends React.Component {
-  constructor() {
+  constructor(props) {
+    super(props);
+    
     this.scrollListener = this.scrollListener.bind(this);
   }
   componentDidMount() {

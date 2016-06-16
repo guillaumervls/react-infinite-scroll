@@ -29,8 +29,6 @@ function topPosition(domElt) {
   return domElt.offsetTop + topPosition(domElt.offsetParent);
 }
 
-var component;
-
 var InfiniteScroll = function (_React$Component) {
   _inherits(InfiniteScroll, _React$Component);
 
@@ -39,7 +37,7 @@ var InfiniteScroll = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(InfiniteScroll).call(this, props));
 
-    component = _this;
+    _this.scrollListener = _this.scrollListener.bind(_this);
     return _this;
   }
 
@@ -63,33 +61,33 @@ var InfiniteScroll = function (_React$Component) {
   }, {
     key: 'scrollListener',
     value: function scrollListener() {
-      var el = _reactDom2.default.findDOMNode(component);
+      var el = _reactDom2.default.findDOMNode(this);
       var scrollEl = window;
 
       var offset;
-      if (component.props.useWindow == true) {
+      if (this.props.useWindow == true) {
         var scrollTop = scrollEl.pageYOffset !== undefined ? scrollEl.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
         offset = topPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
       } else {
         offset = el.offsetHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
       }
 
-      if (offset < Number(component.props.threshold)) {
-        component.detachScrollListener();
+      if (offset < Number(this.props.threshold)) {
+        this.detachScrollListener();
         // call loadMore after detachScrollListener to allow
         // for non-async loadMore functions
-        component.props.loadMore(component.pageLoaded += 1);
+        this.props.loadMore(this.pageLoaded += 1);
       }
     }
   }, {
     key: 'attachScrollListener',
     value: function attachScrollListener() {
-      if (!component.props.hasMore) {
+      if (!this.props.hasMore) {
         return;
       }
 
       var scrollEl = window;
-      if (component.props.useWindow == false) {
+      if (this.props.useWindow == false) {
         scrollEl = _reactDom2.default.findDOMNode(this).parentNode;
       }
 
@@ -101,7 +99,7 @@ var InfiniteScroll = function (_React$Component) {
     key: 'detachScrollListener',
     value: function detachScrollListener() {
       var scrollEl = window;
-      if (component.props.useWindow == false) {
+      if (this.props.useWindow == false) {
         scrollEl = _reactDom2.default.findDOMNode(this).parentNode;
       }
 
