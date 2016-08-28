@@ -1,6 +1,6 @@
 {
   "name": "react-infinite-scroller",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "Infinite scroll component for React in ES6",
   "main": "dist/react-infinite-scroll.js",
   "jsnext:main": "src/react-infinite-scroll.js",
