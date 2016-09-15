@@ -37,7 +37,7 @@ var InfiniteScroll = function (_React$Component) {
   function InfiniteScroll(props) {
     _classCallCheck(this, InfiniteScroll);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(InfiniteScroll).call(this, props));
+    var _this = _possibleConstructorReturn(this, (InfiniteScroll.__proto__ || Object.getPrototypeOf(InfiniteScroll)).call(this, props));
 
     _this.scrollListener = _this.scrollListener.bind(_this);
     return _this;
@@ -81,7 +81,7 @@ var InfiniteScroll = function (_React$Component) {
         var scrollTop = scrollEl.pageYOffset !== undefined ? scrollEl.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
         offset = topPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
       } else {
-        offset = el.offsetHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
+        offset = el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
       }
 
       if (offset < Number(this.props.threshold)) {
