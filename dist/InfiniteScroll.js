@@ -54,23 +54,24 @@ var InfiniteScroll = function (_Component) {
             var children = _props.children;
             var element = _props.element;
             var hasMore = _props.hasMore;
+            var initialLoad = _props.initialLoad;
             var loader = _props.loader;
             var loadMore = _props.loadMore;
             var pageStart = _props.pageStart;
             var threshold = _props.threshold;
             var useWindow = _props.useWindow;
 
-            var props = _objectWithoutProperties(_props, ['children', 'element', 'hasMore', 'loader', 'loadMore', 'pageStart', 'threshold', 'useWindow']);
+            var props = _objectWithoutProperties(_props, ['children', 'element', 'hasMore', 'initialLoad', 'loader', 'loadMore', 'pageStart', 'threshold', 'useWindow']);
 
             return _react2.default.createElement(element, props, children, hasMore && (loader || this._defaultLoader));
         }
     }, {
         key: 'calculateTopPosition',
-        value: function calculateTopPosition(domElt) {
-            if (!domElt) {
+        value: function calculateTopPosition(el) {
+            if (!el) {
                 return 0;
             }
-            return domElt.offsetTop + this.calculateTopPosition(domElt.offsetParent);
+            return el.offsetTop + this.calculateTopPosition(el.offsetParent);
         }
     }, {
         key: 'scrollListener',
@@ -79,7 +80,7 @@ var InfiniteScroll = function (_Component) {
             var scrollEl = window;
 
             var offset = void 0;
-            if (this.props.useWindow == true) {
+            if (this.props.useWindow) {
                 var scrollTop = scrollEl.pageYOffset !== undefined ? scrollEl.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
                 offset = calculateTopPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
             } else {
@@ -108,7 +109,10 @@ var InfiniteScroll = function (_Component) {
 
             scrollEl.addEventListener('scroll', this.scrollListener);
             scrollEl.addEventListener('resize', this.scrollListener);
-            this.scrollListener();
+
+            if (this.props.initialLoad) {
+                this.scrollListener();
+            }
         }
     }, {
         key: 'detachScrollListener',
@@ -142,6 +146,7 @@ var InfiniteScroll = function (_Component) {
 InfiniteScroll.propTypes = {
     element: _react.PropTypes.string,
     hasMore: _react.PropTypes.bool,
+    initialLoad: _react.PropTypes.bool,
     loadMore: _react.PropTypes.func.isRequired,
     pageStart: _react.PropTypes.number,
     threshold: _react.PropTypes.number,
@@ -150,6 +155,7 @@ InfiniteScroll.propTypes = {
 InfiniteScroll.defaultProps = {
     element: 'div',
     hasMore: false,
+    initialLoad: true,
     pageStart: 0,
     threshold: 250,
     useWindow: true

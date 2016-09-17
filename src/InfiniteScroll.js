@@ -5,6 +5,7 @@ export default class InfiniteScroll extends Component {
     static propTypes = {
         element: PropTypes.string,
         hasMore: PropTypes.bool,
+        initialLoad: PropTypes.bool,
         loadMore: PropTypes.func.isRequired,
         pageStart: PropTypes.number,
         threshold: PropTypes.number,
@@ -14,6 +15,7 @@ export default class InfiniteScroll extends Component {
     static defaultProps = {
         element: 'div',
         hasMore: false,
+        initialLoad: true,
         pageStart: 0,
         threshold: 250,
         useWindow: true
@@ -39,6 +41,7 @@ export default class InfiniteScroll extends Component {
             children,
             element,
             hasMore,
+            initialLoad,
             loader,
             loadMore,
             pageStart,
@@ -50,11 +53,11 @@ export default class InfiniteScroll extends Component {
         return React.createElement(element, props, children, hasMore && (loader || this._defaultLoader));
     }
 
-    calculateTopPosition(domElt) {
-        if(!domElt) {
+    calculateTopPosition(el) {
+        if(!el) {
             return 0;
         }
-        return domElt.offsetTop + this.calculateTopPosition(domElt.offsetParent);
+        return el.offsetTop + this.calculateTopPosition(el.offsetParent);
     }
 
     scrollListener() {
@@ -62,7 +65,7 @@ export default class InfiniteScroll extends Component {
         const scrollEl = window;
 
         let offset;
-        if(this.props.useWindow == true) {
+        if(this.props.useWindow) {
             var scrollTop = (scrollEl.pageYOffset !== undefined) ? scrollEl.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
             offset = calculateTopPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
         } else {
@@ -90,7 +93,10 @@ export default class InfiniteScroll extends Component {
 
         scrollEl.addEventListener('scroll', this.scrollListener);
         scrollEl.addEventListener('resize', this.scrollListener);
-        this.scrollListener();
+
+        if(this.props.initialLoad) {
+            this.scrollListener();
+        }
     }
 
     detachScrollListener() {
