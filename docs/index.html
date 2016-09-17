@@ -64,21 +64,62 @@
     &lt;/<span class="pl-ent">InfiniteScroll</span>&gt;
   &lt;/<span class="pl-ent">div</span>&gt;</pre></div>
 
-<ul>
-<li><p><code>pageStart</code> : The page number corresponding to the initial <code>items</code>, defaults to <code>0</code>
-            which means that for the first loading, <code>loadMore</code> will be called with <code>1</code></p></li>
-<li><p><code>loadMore(pageToLoad)</code> : This function is called when the user scrolls down
-                       and we need to load items</p></li>
-<li><p><code>hasMore</code> : Boolean stating whether there are more items to be loaded. Event listeners
-          are removed if <code>false</code>.</p></li>
-<li><p><code>loader</code> : Loader element to be displayed while loading items - You can use
-         <code>InfiniteScroll.setDefaultLoader(loader);</code> to set a defaut loader
-         for all your <code>InfiniteScroll</code> components</p></li>
-<li><p><code>threshold</code> : The distance between the bottom of the page and the bottom of the
-            window's viewport that triggers the loading of new items -
-            <em>Defaults to <code>250</code></em></p></li>
-<li><p><code>useWindow</code> : Boolean stating whether to add listeners to the window, or else, the DOMNode</p></li>
-</ul>
+<h2>
+<a id="props" class="anchor" href="#props" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Props</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Default</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>element</code></td>
+<td style="text-align:left"><code>String</code></td>
+<td style="text-align:left"><code>'div'</code></td>
+<td style="text-align:left">Name of the element that the component should render as.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>hasMore</code></td>
+<td style="text-align:left"><code>Boolean</code></td>
+<td style="text-align:left"><code>false</code></td>
+<td style="text-align:left">Whether there are more items to be loaded. Event listeners are removed if <code>false</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>initialLoad</code></td>
+<td style="text-align:left"><code>Boolean</code></td>
+<td style="text-align:left"><code>true</code></td>
+<td style="text-align:left">Whether the component should load the first set of items.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>loadMore</code></td>
+<td style="text-align:left"><code>Function</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">A callback when more items are requested by the user.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pageStart</code></td>
+<td style="text-align:left"><code>Object</code></td>
+<td style="text-align:left"><code>0</code></td>
+<td style="text-align:left">The number of the first page to load, With the default of <code>0</code>, the first page is <code>1</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>threshold</code></td>
+<td style="text-align:left"><code>Boolean</code></td>
+<td style="text-align:left"><code>250</code></td>
+<td style="text-align:left">The distance in pixels before the end of the items that will trigger a call to <code>loadMore</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>useWindow</code></td>
+<td style="text-align:left"><code>Boolean</code></td>
+<td style="text-align:left"><code>true</code></td>
+<td style="text-align:left">Add scroll listeners to the window, or else, the component's <code>parentNode</code>.</td>
+</tr>
+</tbody>
+</table>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/CassetteRocks/react-infinite-scroller">React Infinite Scroller</a> is maintained by <a href="https://github.com/CassetteRocks">CASSETTE</a>.</span>
