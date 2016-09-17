@@ -23,14 +23,14 @@ import InfiniteScroll from 'react-infinite-scroller';
 ### Window scroll events
 
 ```js
-    <InfiniteScroll
-        pageStart={0}
-        loadMore={loadFunc}
-        hasMore={true || false}
-        loader={<div className="loader">Loading ...</div>}
-    >
-        {items} // <-- This is the content you want to load
-    </InfiniteScroll>
+<InfiniteScroll
+    pageStart={0}
+    loadMore={loadFunc}
+    hasMore={true || false}
+    loader={<div className="loader">Loading ...</div>}
+>
+    {items} // <-- This is the content you want to load
+</InfiniteScroll>
 ```
 
 ### DOM scroll events
