@@ -67,7 +67,7 @@ export default class InfiniteScroll extends Component {
         let offset;
         if(this.props.useWindow) {
             var scrollTop = (scrollEl.pageYOffset !== undefined) ? scrollEl.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-            offset = calculateTopPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
+            offset = this.calculateTopPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
         } else {
             offset = el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
         }
