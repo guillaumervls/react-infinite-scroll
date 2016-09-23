@@ -8,62 +8,58 @@ React Infinite Scroller
 
 Infinitely load content using a React Component. This fork maintains a simple, lightweight infinite scroll package that supports both `window` and scrollable elements.
 
+- [Demo](https://cassetterocks.github.io/react-infinite-scroller/demo/)
+- [Demo Source](https://github.com/CassetteRocks/react-infinite-scroller/blob/master/docs/src/index.js)
+
 ## Installation
 
 ```
-  npm i react-infinite-scroller
+npm install react-infinite-scroller --save
 ```
 
 ## How to use
 
-The module supports ES6 imports with `jsnext:main` and require with `main` in the package.json.
-
-```
-  import InfiniteScroll from 'react-infinite-scroller'
+```js
+import InfiniteScroll from 'react-infinite-scroller';
 ```
 
 ### Window scroll events
 
-```html
-  <InfiniteScroll
-      pageStart={0}
-      loadMore={loadFunc}
-      hasMore={true || false}
-      loader={<div className="loader">Loading ...</div>}>
+```js
+<InfiniteScroll
+    pageStart={0}
+    loadMore={loadFunc}
+    hasMore={true || false}
+    loader={<div className="loader">Loading ...</div>}
+>
     {items} // <-- This is the content you want to load
-  </InfiniteScroll>
+</InfiniteScroll>
 ```
 
 ### DOM scroll events
 
 ```html
-  <div style="height:700px;overflow:auto;">
+<div style="height:700px;overflow:auto;">
     <InfiniteScroll
         pageStart={0}
         loadMore={loadFunc}
         hasMore={true || false}
         loader={<div className="loader">Loading ...</div>}
-        useWindow={false}>
-      {items}
+        useWindow={false}
+    >
+        {items}
     </InfiniteScroll>
-  </div>
+</div>
 ```
 
-- `pageStart` : The page number corresponding to the initial `items`, defaults to `0`
-                which means that for the first loading, `loadMore` will be called with `1`
+## Props
 
-- `loadMore(pageToLoad)` : This function is called when the user scrolls down
-                           and we need to load items
-
-- `hasMore` : Boolean stating whether there are more items to be loaded. Event listeners
-              are removed if `false`.
-
-- `loader` : Loader element to be displayed while loading items - You can use
-             `InfiniteScroll.setDefaultLoader(loader);` to set a defaut loader
-             for all your `InfiniteScroll` components
-
-- `threshold` : The distance between the bottom of the page and the bottom of the
-                window's viewport that triggers the loading of new items -
-                *Defaults to `250`*
-
-- `useWindow` : Boolean stating whether to add listeners to the window, or else, the DOMNode
+| Name             | Type          | Default    | Description|
+|:----             |:----          |:----       |:----|
+| `element`        | `String`      | `'div'`    | Name of the element that the component should render as.|
+| `hasMore`        | `Boolean`     | `false`    | Whether there are more items to be loaded. Event listeners are removed if `false`.|
+| `initialLoad`    | `Boolean`     | `true`     | Whether the component should load the first set of items.|
+| `loadMore`       | `Function`    |            | A callback when more items are requested by the user.|
+| `pageStart`      | `Object`      | `0`        | The number of the first page to load, With the default of `0`, the first page is `1`.|
+| `threshold`      | `Boolean`     | `250`      | The distance in pixels before the end of the items that will trigger a call to `loadMore`.|
+| `useWindow`      | `Boolean`     | `true`     | Add scroll listeners to the window, or else, the component's `parentNode`.|
