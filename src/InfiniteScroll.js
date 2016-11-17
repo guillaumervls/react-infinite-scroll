@@ -9,7 +9,8 @@ export default class InfiniteScroll extends Component {
         loadMore: PropTypes.func.isRequired,
         pageStart: PropTypes.number,
         threshold: PropTypes.number,
-        useWindow: PropTypes.bool
+        useWindow: PropTypes.bool,
+        isReverse: PropTypes.bool
     };
 
     static defaultProps = {
@@ -18,7 +19,8 @@ export default class InfiniteScroll extends Component {
         initialLoad: true,
         pageStart: 0,
         threshold: 250,
-        useWindow: true
+        useWindow: true,
+        isReverse: false
     };
 
     constructor(props) {
@@ -47,6 +49,7 @@ export default class InfiniteScroll extends Component {
             pageStart,
             threshold,
             useWindow,
+            isReverse,
             ...props
         } = this.props;
 
@@ -67,9 +70,15 @@ export default class InfiniteScroll extends Component {
         let offset;
         if(this.props.useWindow) {
             var scrollTop = (scrollEl.pageYOffset !== undefined) ? scrollEl.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-            offset = this.calculateTopPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
+            if (this.props.isReverse)
+                offset = scrollTop;
+            else
+                offset = this.calculateTopPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
         } else {
-            offset = el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
+            if (this.props.isReverse)
+                offset = el.parentNode.scrollTop;
+            else
+                offset = el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
         }
 
         if(offset < Number(this.props.threshold)) {
