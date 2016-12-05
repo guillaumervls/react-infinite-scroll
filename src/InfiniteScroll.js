@@ -56,7 +56,7 @@ export default class InfiniteScroll extends Component {
 
         return React.createElement(element, {
             ref,
-        }, children);
+        }, ...props, children);
     }
 
     calculateTopPosition(el) {
@@ -114,7 +114,7 @@ export default class InfiniteScroll extends Component {
     detachScrollListener() {
         var scrollEl = window;
         if(this.props.useWindow == false) {
-            scrollEl = ReactDOM.findDOMNode(this).parentNode;
+            scrollEl = this.scrollComponent.parentNode;
         }
 
         scrollEl.removeEventListener('scroll', this.scrollListener);
