@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 
 export default class InfiniteScroll extends Component {
     static propTypes = {
@@ -53,7 +52,11 @@ export default class InfiniteScroll extends Component {
             ...props
         } = this.props;
 
-        return React.createElement(element, props, children, hasMore && (loader || this._defaultLoader));
+        const ref = (node) => { this.scrollComponent = node; };
+
+        return React.createElement(element, {
+            ref,
+        }, children);
     }
 
     calculateTopPosition(el) {
@@ -64,7 +67,7 @@ export default class InfiniteScroll extends Component {
     }
 
     scrollListener() {
-        const el = ReactDOM.findDOMNode(this);
+        const el = this.scrollComponent;
         const scrollEl = window;
 
         let offset;
@@ -97,7 +100,7 @@ export default class InfiniteScroll extends Component {
 
         let scrollEl = window;
         if(this.props.useWindow == false) {
-            scrollEl = ReactDOM.findDOMNode(this).parentNode;
+            scrollEl = this.scrollComponent.parentNode;
         }
 
         scrollEl.addEventListener('scroll', this.scrollListener);
