@@ -52,11 +52,9 @@ export default class InfiniteScroll extends Component {
             ...props
         } = this.props;
 
-        const ref = (node) => { this.scrollComponent = node; };
+        props.ref = (node) => { this.scrollComponent = node; };
 
-        return React.createElement(element, {
-            ref,
-        }, ...props, children);
+        return React.createElement(element, props, children, hasMore && (loader || this._defaultLoader));
     }
 
     calculateTopPosition(el) {
