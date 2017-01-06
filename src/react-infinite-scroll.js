@@ -1,3 +1,5 @@
+var React = require('react'), ReactDOM = require('react-dom');
+
 function topPosition(domElt) {
   if (!domElt) {
     return 0;
@@ -5,7 +7,7 @@ function topPosition(domElt) {
   return domElt.offsetTop + topPosition(domElt.offsetParent);
 }
 
-module.exports = function (React) {
+module.exports = function () {
   if (React.addons && React.addons.InfiniteScroll) {
     return React.addons.InfiniteScroll;
   }
@@ -28,10 +30,11 @@ module.exports = function (React) {
     },
     render: function () {
       var props = this.props;
+
       return React.DOM.div(null, props.children, props.hasMore && (props.loader || InfiniteScroll._defaultLoader));
     },
-    scrollListener: function () {
-      var el = this.getDOMNode();
+    scrollListener: function (ev) {
+      var el = ReactDOM.findDOMNode(this);
       var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
       if (topPosition(el) + el.offsetHeight - scrollTop - window.innerHeight < Number(this.props.threshold)) {
         this.detachScrollListener();
