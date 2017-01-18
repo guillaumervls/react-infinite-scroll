@@ -62,5 +62,5 @@ import InfiniteScroll from 'react-infinite-scroller';
 | `isReverse`      | `Boolean`     | `false`    | Whether new items should be loaded when user scrolls to the top of the scrollable area.|
 | `loadMore`       | `Function`    |            | A callback when more items are requested by the user.|
 | `pageStart`      | `Object`      | `0`        | The number of the first page to load, With the default of `0`, the first page is `1`.|
-| `threshold`      | `Boolean`     | `250`      | The distance in pixels before the end of the items that will trigger a call to `loadMore`.|
+| `threshold`      | `Number`     | `250`      | The distance in pixels before the end of the items that will trigger a call to `loadMore`.|
 | `useWindow`      | `Boolean`     | `true`     | Add scroll listeners to the window, or else, the component's `parentNode`.|
