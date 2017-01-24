@@ -64,6 +64,10 @@ export default class InfiniteScroll extends Component {
         this.pageLoaded = this.props.pageStart;
     }
 
+    setPageLoaded(page) {
+        this.pageLoaded = page;
+    }
+
     render() {
         const {
             children,
