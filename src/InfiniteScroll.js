@@ -40,6 +40,7 @@ export default class InfiniteScroll extends Component {
 
     componentWillReceiveProps(nextProps) {
         // Attach if new children
+        clearTimeout(this.timeoutIndex);
         const shouldUpdate = (
             this.props.children && nextProps.children &&
             (
@@ -49,7 +50,7 @@ export default class InfiniteScroll extends Component {
         )
         if (shouldUpdate) {
             var _this = this;
-            setTimeout(function () {
+            this.timeoutIndex = setTimeout(function () {
                 _this.attachScrollListener();
             }, 250);
         }
@@ -95,6 +96,13 @@ export default class InfiniteScroll extends Component {
         return el.offsetTop + this.calculateTopPosition(el.offsetParent);
     }
 
+    calculateOffsetHeight(el) {
+        if(!el) {
+          return 0;
+        }
+        return el.offsetHeight;
+    }
+
     scrollListener() {
         const el = this.scrollComponent;
         const scrollEl = window;
@@ -105,7 +113,7 @@ export default class InfiniteScroll extends Component {
             if (this.props.isReverse)
                 offset = scrollTop;
             else
-                offset = this.calculateTopPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
+                offset = this.calculateTopPosition(el) + this.calculateOffsetHeight(el) - scrollTop - window.innerHeight;
         } else {
             if (this.props.isReverse)
                 offset = el.parentNode.scrollTop;
@@ -123,7 +131,7 @@ export default class InfiniteScroll extends Component {
     }
 
     attachScrollListener(nextProps) {
-        const hasMore = this.props.hasMore || (nextProps && nextProps.hasMore)
+        const hasMore = this.props.hasMore || (nextProps && nextProps.hasMore);
         if(!hasMore) {
             return;
         }
