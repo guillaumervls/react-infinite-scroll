@@ -26,6 +26,7 @@ export default class InfiniteScroll extends Component {
         super(props);
 
         this.scrollListener = this.scrollListener.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     componentDidMount() {
@@ -34,7 +35,38 @@ export default class InfiniteScroll extends Component {
     }
 
     componentDidUpdate() {
-        this.attachScrollListener();
+        // this.attachScrollListener();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        // Attach if new children
+        clearTimeout(this.timeoutIndex);
+        const shouldUpdate = (
+            this.props.children && nextProps.children &&
+            (
+                (this.props.children.length !== nextProps.children.length) ||
+                (this.props.children.size !== nextProps.children.size) // For support ImmutableJS
+            )
+        )
+        if (shouldUpdate) {
+            var _this = this;
+            this.timeoutIndex = setTimeout(function () {
+                _this.attachScrollListener();
+            }, 250);
+        }
+        // Attach if availability change
+        if (this.props.hasMore !== nextProps.hasMore) {
+            // Pass next props to evaluate before props get it
+            this.attachScrollListener(nextProps);
+        }
+    }
+
+    reset() {
+        this.pageLoaded = this.props.pageStart;
+    }
+
+    setPageLoaded(page) {
+        this.pageLoaded = page;
     }
 
     render() {
@@ -64,6 +96,13 @@ export default class InfiniteScroll extends Component {
         return el.offsetTop + this.calculateTopPosition(el.offsetParent);
     }
 
+    calculateOffsetHeight(el) {
+        if(!el) {
+          return 0;
+        }
+        return el.offsetHeight;
+    }
+
     scrollListener() {
         const el = this.scrollComponent;
         const scrollEl = window;
@@ -74,7 +113,7 @@ export default class InfiniteScroll extends Component {
             if (this.props.isReverse)
                 offset = scrollTop;
             else
-                offset = this.calculateTopPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
+                offset = this.calculateTopPosition(el) + this.calculateOffsetHeight(el) - scrollTop - window.innerHeight;
         } else {
             if (this.props.isReverse)
                 offset = el.parentNode.scrollTop;
@@ -91,8 +130,9 @@ export default class InfiniteScroll extends Component {
         }
     }
 
-    attachScrollListener() {
-        if(!this.props.hasMore) {
+    attachScrollListener(nextProps) {
+        const hasMore = this.props.hasMore || (nextProps && nextProps.hasMore);
+        if(!hasMore) {
             return;
         }
 
@@ -122,7 +162,7 @@ export default class InfiniteScroll extends Component {
     componentWillUnmount() {
         this.detachScrollListener();
     }
-    
+
     // Set a defaut loader for all your `InfiniteScroll` components
     setDefaultLoader(loader) {
         this._defaultLoader = loader;
