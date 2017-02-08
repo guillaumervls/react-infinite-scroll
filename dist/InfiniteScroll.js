@@ -26,11 +26,10 @@ var InfiniteScroll = function (_Component) {
     function InfiniteScroll(props) {
         _classCallCheck(this, InfiniteScroll);
 
-        var _this2 = _possibleConstructorReturn(this, (InfiniteScroll.__proto__ || Object.getPrototypeOf(InfiniteScroll)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (InfiniteScroll.__proto__ || Object.getPrototypeOf(InfiniteScroll)).call(this, props));
 
-        _this2.scrollListener = _this2.scrollListener.bind(_this2);
-        _this2.reset = _this2.reset.bind(_this2);
-        return _this2;
+        _this.scrollListener = _this.scrollListener.bind(_this);
+        return _this;
     }
 
     _createClass(InfiniteScroll, [{
@@ -42,41 +41,12 @@ var InfiniteScroll = function (_Component) {
     }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate() {
-            // this.attachScrollListener();
-        }
-    }, {
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            // Attach if new children
-            clearTimeout(this.timeoutIndex);
-            var shouldUpdate = this.props.children && nextProps.children && (this.props.children.length !== nextProps.children.length || this.props.children.size !== nextProps.children.size // For support ImmutableJS
-            );
-            if (shouldUpdate) {
-                var _this = this;
-                this.timeoutIndex = setTimeout(function () {
-                    _this.attachScrollListener();
-                }, 250);
-            }
-            // Attach if availability change
-            if (this.props.hasMore !== nextProps.hasMore) {
-                // Pass next props to evaluate before props get it
-                this.attachScrollListener(nextProps);
-            }
-        }
-    }, {
-        key: 'reset',
-        value: function reset() {
-            this.pageLoaded = this.props.pageStart;
-        }
-    }, {
-        key: 'setPageLoaded',
-        value: function setPageLoaded(page) {
-            this.pageLoaded = page;
+            this.attachScrollListener();
         }
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
+            var _this2 = this;
 
             var _props = this.props;
             var children = _props.children;
@@ -92,11 +62,13 @@ var InfiniteScroll = function (_Component) {
 
             var props = _objectWithoutProperties(_props, ['children', 'element', 'hasMore', 'initialLoad', 'loader', 'loadMore', 'pageStart', 'threshold', 'useWindow', 'isReverse']);
 
-            props.ref = function (node) {
-                _this3.scrollComponent = node;
+            var ref = function ref(node) {
+                _this2.scrollComponent = node;
             };
 
-            return _react2.default.createElement(element, props, children, hasMore && (loader || this._defaultLoader));
+            return _react2.default.createElement(element, {
+                ref: ref
+            }, children);
         }
     }, {
         key: 'calculateTopPosition',
@@ -107,14 +79,6 @@ var InfiniteScroll = function (_Component) {
             return el.offsetTop + this.calculateTopPosition(el.offsetParent);
         }
     }, {
-        key: 'calculateOffsetHeight',
-        value: function calculateOffsetHeight(el) {
-            if (!el) {
-                return 0;
-            }
-            return el.offsetHeight;
-        }
-    }, {
         key: 'scrollListener',
         value: function scrollListener() {
             var el = this.scrollComponent;
@@ -123,7 +87,7 @@ var InfiniteScroll = function (_Component) {
             var offset = void 0;
             if (this.props.useWindow) {
                 var scrollTop = scrollEl.pageYOffset !== undefined ? scrollEl.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-                if (this.props.isReverse) offset = scrollTop;else offset = this.calculateTopPosition(el) + this.calculateOffsetHeight(el) - scrollTop - window.innerHeight;
+                if (this.props.isReverse) offset = scrollTop;else offset = this.calculateTopPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
             } else {
                 if (this.props.isReverse) offset = el.parentNode.scrollTop;else offset = el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
             }
@@ -138,9 +102,8 @@ var InfiniteScroll = function (_Component) {
         }
     }, {
         key: 'attachScrollListener',
-        value: function attachScrollListener(nextProps) {
-            var hasMore = this.props.hasMore || nextProps && nextProps.hasMore;
-            if (!hasMore) {
+        value: function attachScrollListener() {
+            if (!this.props.hasMore) {
                 return;
             }
 
@@ -161,7 +124,7 @@ var InfiniteScroll = function (_Component) {
         value: function detachScrollListener() {
             var scrollEl = window;
             if (this.props.useWindow == false) {
-                scrollEl = this.scrollComponent.parentNode;
+                scrollEl = ReactDOM.findDOMNode(this).parentNode;
             }
 
             scrollEl.removeEventListener('scroll', this.scrollListener);
