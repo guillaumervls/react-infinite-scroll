@@ -64,3 +64,5 @@ import InfiniteScroll from 'react-infinite-scroller';
 | `pageStart`      | `Number`      | `0`        | The number of the first page to load, With the default of `0`, the first page is `1`.|
 | `threshold`      | `Number`     | `250`      | The distance in pixels before the end of the items that will trigger a call to `loadMore`.|
 | `useWindow`      | `Boolean`     | `true`     | Add scroll listeners to the window, or else, the component's `parentNode`.|
+| `useCapture`     | `Boolean`     | `false`     | Proxy to the `useCapture` option of the added event listeners.|
+
