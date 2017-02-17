@@ -53,22 +53,21 @@ var InfiniteScroll = function (_Component) {
             var element = _props.element;
             var hasMore = _props.hasMore;
             var initialLoad = _props.initialLoad;
+            var isReverse = _props.isReverse;
             var loader = _props.loader;
             var loadMore = _props.loadMore;
             var pageStart = _props.pageStart;
             var threshold = _props.threshold;
+            var useCapture = _props.useCapture;
             var useWindow = _props.useWindow;
-            var isReverse = _props.isReverse;
 
-            var props = _objectWithoutProperties(_props, ['children', 'element', 'hasMore', 'initialLoad', 'loader', 'loadMore', 'pageStart', 'threshold', 'useWindow', 'isReverse']);
+            var props = _objectWithoutProperties(_props, ['children', 'element', 'hasMore', 'initialLoad', 'isReverse', 'loader', 'loadMore', 'pageStart', 'threshold', 'useCapture', 'useWindow']);
 
-            var ref = function ref(node) {
+            props.ref = function (node) {
                 _this2.scrollComponent = node;
             };
 
-            return _react2.default.createElement(element, {
-                ref: ref
-            }, children);
+            return _react2.default.createElement(element, props, children, hasMore && (loader || this._defaultLoader));
         }
     }, {
         key: 'calculateTopPosition',
@@ -112,8 +111,8 @@ var InfiniteScroll = function (_Component) {
                 scrollEl = this.scrollComponent.parentNode;
             }
 
-            scrollEl.addEventListener('scroll', this.scrollListener);
-            scrollEl.addEventListener('resize', this.scrollListener);
+            scrollEl.addEventListener('scroll', this.scrollListener, this.props.useCapture);
+            scrollEl.addEventListener('resize', this.scrollListener, this.props.useCapture);
 
             if (this.props.initialLoad) {
                 this.scrollListener();
@@ -124,11 +123,11 @@ var InfiniteScroll = function (_Component) {
         value: function detachScrollListener() {
             var scrollEl = window;
             if (this.props.useWindow == false) {
-                scrollEl = ReactDOM.findDOMNode(this).parentNode;
+                scrollEl = this.scrollComponent.parentNode;
             }
 
-            scrollEl.removeEventListener('scroll', this.scrollListener);
-            scrollEl.removeEventListener('resize', this.scrollListener);
+            scrollEl.removeEventListener('scroll', this.scrollListener, this.props.useCapture);
+            scrollEl.removeEventListener('resize', this.scrollListener, this.props.useCapture);
         }
     }, {
         key: 'componentWillUnmount',
@@ -152,11 +151,12 @@ InfiniteScroll.propTypes = {
     element: _react.PropTypes.string,
     hasMore: _react.PropTypes.bool,
     initialLoad: _react.PropTypes.bool,
+    isReverse: _react.PropTypes.bool,
     loadMore: _react.PropTypes.func.isRequired,
     pageStart: _react.PropTypes.number,
     threshold: _react.PropTypes.number,
-    useWindow: _react.PropTypes.bool,
-    isReverse: _react.PropTypes.bool
+    useCapture: _react.PropTypes.bool,
+    useWindow: _react.PropTypes.bool
 };
 InfiniteScroll.defaultProps = {
     element: 'div',
@@ -165,7 +165,8 @@ InfiniteScroll.defaultProps = {
     pageStart: 0,
     threshold: 250,
     useWindow: true,
-    isReverse: false
+    isReverse: false,
+    useCapture: false
 };
 exports.default = InfiniteScroll;
 module.exports = exports['default'];

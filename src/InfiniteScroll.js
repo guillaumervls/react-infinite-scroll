@@ -5,12 +5,12 @@ export default class InfiniteScroll extends Component {
         element: PropTypes.string,
         hasMore: PropTypes.bool,
         initialLoad: PropTypes.bool,
+        isReverse: PropTypes.bool,
         loadMore: PropTypes.func.isRequired,
         pageStart: PropTypes.number,
         threshold: PropTypes.number,
+        useCapture: PropTypes.bool,
         useWindow: PropTypes.bool,
-        isReverse: PropTypes.bool,
-        useCapture: PropTypes.bool
     };
 
     static defaultProps = {
@@ -21,7 +21,7 @@ export default class InfiniteScroll extends Component {
         threshold: 250,
         useWindow: true,
         isReverse: false,
-        useCapture: false
+        useCapture: false,
     };
 
     constructor(props) {
@@ -45,12 +45,13 @@ export default class InfiniteScroll extends Component {
             element,
             hasMore,
             initialLoad,
+            isReverse,
             loader,
             loadMore,
             pageStart,
             threshold,
+            useCapture,
             useWindow,
-            isReverse,
             ...props
         } = this.props;
 
