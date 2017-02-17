@@ -9,7 +9,8 @@ export default class InfiniteScroll extends Component {
         pageStart: PropTypes.number,
         threshold: PropTypes.number,
         useWindow: PropTypes.bool,
-        isReverse: PropTypes.bool
+        isReverse: PropTypes.bool,
+        useCapture: PropTypes.bool
     };
 
     static defaultProps = {
@@ -19,7 +20,8 @@ export default class InfiniteScroll extends Component {
         pageStart: 0,
         threshold: 250,
         useWindow: true,
-        isReverse: false
+        isReverse: false,
+        useCapture: false
     };
 
     constructor(props) {
@@ -101,8 +103,8 @@ export default class InfiniteScroll extends Component {
             scrollEl = this.scrollComponent.parentNode;
         }
 
-        scrollEl.addEventListener('scroll', this.scrollListener);
-        scrollEl.addEventListener('resize', this.scrollListener);
+        scrollEl.addEventListener('scroll', this.scrollListener, this.props.useCapture);
+        scrollEl.addEventListener('resize', this.scrollListener, this.props.useCapture);
 
         if(this.props.initialLoad) {
             this.scrollListener();
@@ -115,8 +117,8 @@ export default class InfiniteScroll extends Component {
             scrollEl = this.scrollComponent.parentNode;
         }
 
-        scrollEl.removeEventListener('scroll', this.scrollListener);
-        scrollEl.removeEventListener('resize', this.scrollListener);
+        scrollEl.removeEventListener('scroll', this.scrollListener, this.props.useCapture);
+        scrollEl.removeEventListener('resize', this.scrollListener, this.props.useCapture);
     }
 
     componentWillUnmount() {
