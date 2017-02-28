@@ -39,6 +39,10 @@ export default class InfiniteScroll extends Component {
         this.attachScrollListener();
     }
 
+    getParentElement(el) {
+        return el.parentNode;
+    }
+
     render() {
         const {
             children,
@@ -70,6 +74,7 @@ export default class InfiniteScroll extends Component {
     scrollListener() {
         const el = this.scrollComponent;
         const scrollEl = window;
+        const parentNode = this.getParentElement(el);
 
         let offset;
         if(this.props.useWindow) {
@@ -80,9 +85,9 @@ export default class InfiniteScroll extends Component {
                 offset = this.calculateTopPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
         } else {
             if (this.props.isReverse)
-                offset = el.parentNode.scrollTop;
+                offset = parentNode.scrollTop;
             else
-                offset = el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
+                offset = el.scrollHeight - parentNode.scrollTop - parentNode.clientHeight;
         }
 
         if(offset < Number(this.props.threshold)) {
@@ -125,7 +130,7 @@ export default class InfiniteScroll extends Component {
     componentWillUnmount() {
         this.detachScrollListener();
     }
-    
+
     // Set a defaut loader for all your `InfiniteScroll` components
     setDefaultLoader(loader) {
         this._defaultLoader = loader;
