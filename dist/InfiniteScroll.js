@@ -113,7 +113,7 @@ var InfiniteScroll = function (_Component) {
 
             var scrollEl = window;
             if (this.props.useWindow == false) {
-                scrollEl = this.scrollComponent.parentNode;
+                scrollEl = this.getParentElement(this.scrollComponent);
             }
 
             scrollEl.addEventListener('scroll', this.scrollListener, this.props.useCapture);
