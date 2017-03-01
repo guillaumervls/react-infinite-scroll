@@ -100,7 +100,7 @@ export default class InfiniteScroll extends Component {
     }
 
     attachScrollListener() {
-        if(!this.props.hasMore) {
+        if(!this.props.hasMore || !this.getParentElement(this.scrollComponent)) {
             return;
         }
 
@@ -120,7 +120,7 @@ export default class InfiniteScroll extends Component {
     detachScrollListener() {
         var scrollEl = window;
         if(this.props.useWindow == false) {
-            scrollEl = this.scrollComponent.parentNode;
+            scrollEl = this.getParentElement(this.scrollComponent);
         }
 
         scrollEl.removeEventListener('scroll', this.scrollListener, this.props.useCapture);
