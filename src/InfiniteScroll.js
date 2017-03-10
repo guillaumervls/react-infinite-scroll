@@ -43,7 +43,12 @@ export default class InfiniteScroll extends Component {
         return el.parentNode;
     }
 
+    filterProps(props) {
+        return props;
+    }
+
     render() {
+        const renderProps = filterProps(this.props);
         const {
             children,
             element,
@@ -57,7 +62,7 @@ export default class InfiniteScroll extends Component {
             useCapture,
             useWindow,
             ...props
-        } = this.props;
+        } = renderProps;
 
         props.ref = (node) => { this.scrollComponent = node; };
 
