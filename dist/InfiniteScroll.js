@@ -58,7 +58,7 @@ var InfiniteScroll = function (_Component) {
         value: function render() {
             var _this2 = this;
 
-            var renderProps = filterProps(this.props);
+            var renderProps = this.filterProps(this.props);
 
             var children = renderProps.children,
                 element = renderProps.element,

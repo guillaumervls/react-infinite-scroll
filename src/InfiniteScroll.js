@@ -48,7 +48,7 @@ export default class InfiniteScroll extends Component {
     }
 
     render() {
-        const renderProps = filterProps(this.props);
+        const renderProps = this.filterProps(this.props);
         const {
             children,
             element,
