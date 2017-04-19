@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -48,20 +52,19 @@ var InfiniteScroll = function (_Component) {
         value: function render() {
             var _this2 = this;
 
-            var _props = this.props;
-            var children = _props.children;
-            var element = _props.element;
-            var hasMore = _props.hasMore;
-            var initialLoad = _props.initialLoad;
-            var isReverse = _props.isReverse;
-            var loader = _props.loader;
-            var loadMore = _props.loadMore;
-            var pageStart = _props.pageStart;
-            var threshold = _props.threshold;
-            var useCapture = _props.useCapture;
-            var useWindow = _props.useWindow;
-
-            var props = _objectWithoutProperties(_props, ['children', 'element', 'hasMore', 'initialLoad', 'isReverse', 'loader', 'loadMore', 'pageStart', 'threshold', 'useCapture', 'useWindow']);
+            var _props = this.props,
+                children = _props.children,
+                element = _props.element,
+                hasMore = _props.hasMore,
+                initialLoad = _props.initialLoad,
+                isReverse = _props.isReverse,
+                loader = _props.loader,
+                loadMore = _props.loadMore,
+                pageStart = _props.pageStart,
+                threshold = _props.threshold,
+                useCapture = _props.useCapture,
+                useWindow = _props.useWindow,
+                props = _objectWithoutProperties(_props, ['children', 'element', 'hasMore', 'initialLoad', 'isReverse', 'loader', 'loadMore', 'pageStart', 'threshold', 'useCapture', 'useWindow']);
 
             props.ref = function (node) {
                 _this2.scrollComponent = node;
@@ -148,15 +151,15 @@ var InfiniteScroll = function (_Component) {
 }(_react.Component);
 
 InfiniteScroll.propTypes = {
-    element: _react.PropTypes.string,
-    hasMore: _react.PropTypes.bool,
-    initialLoad: _react.PropTypes.bool,
-    isReverse: _react.PropTypes.bool,
-    loadMore: _react.PropTypes.func.isRequired,
-    pageStart: _react.PropTypes.number,
-    threshold: _react.PropTypes.number,
-    useCapture: _react.PropTypes.bool,
-    useWindow: _react.PropTypes.bool
+    element: _propTypes2.default.string,
+    hasMore: _propTypes2.default.bool,
+    initialLoad: _propTypes2.default.bool,
+    isReverse: _propTypes2.default.bool,
+    loadMore: _propTypes2.default.func.isRequired,
+    pageStart: _propTypes2.default.number,
+    threshold: _propTypes2.default.number,
+    useCapture: _propTypes2.default.bool,
+    useWindow: _propTypes2.default.bool
 };
 InfiniteScroll.defaultProps = {
     element: 'div',
