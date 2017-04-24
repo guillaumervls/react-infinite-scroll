@@ -52,20 +52,19 @@ var InfiniteScroll = function (_Component) {
         value: function render() {
             var _this2 = this;
 
-            var _props = this.props;
-            var children = _props.children;
-            var element = _props.element;
-            var hasMore = _props.hasMore;
-            var initialLoad = _props.initialLoad;
-            var isReverse = _props.isReverse;
-            var loader = _props.loader;
-            var loadMore = _props.loadMore;
-            var pageStart = _props.pageStart;
-            var threshold = _props.threshold;
-            var useCapture = _props.useCapture;
-            var useWindow = _props.useWindow;
-
-            var props = _objectWithoutProperties(_props, ['children', 'element', 'hasMore', 'initialLoad', 'isReverse', 'loader', 'loadMore', 'pageStart', 'threshold', 'useCapture', 'useWindow']);
+            var _props = this.props,
+                children = _props.children,
+                element = _props.element,
+                hasMore = _props.hasMore,
+                initialLoad = _props.initialLoad,
+                isReverse = _props.isReverse,
+                loader = _props.loader,
+                loadMore = _props.loadMore,
+                pageStart = _props.pageStart,
+                threshold = _props.threshold,
+                useCapture = _props.useCapture,
+                useWindow = _props.useWindow,
+                props = _objectWithoutProperties(_props, ['children', 'element', 'hasMore', 'initialLoad', 'isReverse', 'loader', 'loadMore', 'pageStart', 'threshold', 'useCapture', 'useWindow']);
 
             props.ref = function (node) {
                 _this2.scrollComponent = node;
