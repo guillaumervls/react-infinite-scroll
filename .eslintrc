@@ -1,0 +1,21 @@
+{
+  "extends": "eslint-config-airbnb",
+  "env": {
+    "mocha": true,
+    "browser": true
+  },
+  "globals": {
+    "expect": true,
+    "window": true,
+    "document": true
+  },
+  "rules": {
+    "padded-blocks": 0,
+    "no-use-before-define": [2, "nofunc"],
+    "no-unused-expressions": 0,
+    "import/no-extraneous-dependencies": [ "error", { "devDependencies": true }],
+    "react/forbid-prop-types": [1, { "forbid": [] }],
+    "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }]
+  },
+  "parser": "babel-eslint"
+}
