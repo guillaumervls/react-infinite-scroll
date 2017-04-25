@@ -1,17 +1,17 @@
 /*eslint-disable*/
 require('babel-register')();
 var chai = require('chai');
-var jsdom = require('jsdom').jsdom;
+var JSDOM = require('jsdom').JSDOM;
 var chaiEnzyme = require('chai-enzyme');
 var exposedProperties = ['window', 'navigator', 'document'];
 
-global.document = jsdom('<body></body>');
-global.window = document.defaultView;
+global.dom = new JSDOM('<body></body>');
+global.window = dom.window.document.defaultView;
 
-Object.keys(document.defaultView).forEach((property) => {
+Object.keys(dom.window.document.defaultView).forEach((property) => {
   if (typeof global[property] === 'undefined') {
     exposedProperties.push(property);
-    global[property] = document.defaultView[property];
+    global[property] = dom.window.document.defaultView[property];
   }
 });
 

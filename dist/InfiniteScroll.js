@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -25,151 +25,160 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var InfiniteScroll = function (_Component) {
-    _inherits(InfiniteScroll, _Component);
+  _inherits(InfiniteScroll, _Component);
 
-    function InfiniteScroll(props) {
-        _classCallCheck(this, InfiniteScroll);
+  function InfiniteScroll(props) {
+    _classCallCheck(this, InfiniteScroll);
 
-        var _this = _possibleConstructorReturn(this, (InfiniteScroll.__proto__ || Object.getPrototypeOf(InfiniteScroll)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (InfiniteScroll.__proto__ || Object.getPrototypeOf(InfiniteScroll)).call(this, props));
 
-        _this.scrollListener = _this.scrollListener.bind(_this);
-        return _this;
+    _this.scrollListener = _this.scrollListener.bind(_this);
+    return _this;
+  }
+
+  _createClass(InfiniteScroll, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.pageLoaded = this.props.pageStart;
+      this.attachScrollListener();
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      this.attachScrollListener();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.detachScrollListener();
     }
 
-    _createClass(InfiniteScroll, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.pageLoaded = this.props.pageStart;
-            this.attachScrollListener();
+    // Set a defaut loader for all your `InfiniteScroll` components
+
+  }, {
+    key: 'setDefaultLoader',
+    value: function setDefaultLoader(loader) {
+      this.defaultLoader = loader;
+    }
+  }, {
+    key: 'detachScrollListener',
+    value: function detachScrollListener() {
+      var scrollEl = window;
+      if (this.props.useWindow === false) {
+        scrollEl = this.scrollComponent.parentNode;
+      }
+
+      scrollEl.removeEventListener('scroll', this.scrollListener, this.props.useCapture);
+      scrollEl.removeEventListener('resize', this.scrollListener, this.props.useCapture);
+    }
+  }, {
+    key: 'attachScrollListener',
+    value: function attachScrollListener() {
+      if (!this.props.hasMore) {
+        return;
+      }
+
+      var scrollEl = window;
+      if (this.props.useWindow === false) {
+        scrollEl = this.scrollComponent.parentNode;
+      }
+
+      scrollEl.addEventListener('scroll', this.scrollListener, this.props.useCapture);
+      scrollEl.addEventListener('resize', this.scrollListener, this.props.useCapture);
+
+      if (this.props.initialLoad) {
+        this.scrollListener();
+      }
+    }
+  }, {
+    key: 'scrollListener',
+    value: function scrollListener() {
+      var el = this.scrollComponent;
+      var scrollEl = window;
+
+      var offset = void 0;
+      if (this.props.useWindow) {
+        var scrollTop = scrollEl.pageYOffset !== undefined ? scrollEl.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+        if (this.props.isReverse) {
+          offset = scrollTop;
+        } else {
+          offset = this.calculateTopPosition(el) + (el.offsetHeight - scrollTop - window.innerHeight);
         }
-    }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
-            this.attachScrollListener();
+      } else if (this.props.isReverse) {
+        offset = el.parentNode.scrollTop;
+      } else {
+        offset = el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
+      }
+
+      if (offset < Number(this.props.threshold)) {
+        this.detachScrollListener();
+        // Call loadMore after detachScrollListener to allow for non-async loadMore functions
+        if (typeof this.props.loadMore === 'function') {
+          this.props.loadMore(this.pageLoaded += 1);
         }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
+      }
+    }
+  }, {
+    key: 'calculateTopPosition',
+    value: function calculateTopPosition(el) {
+      if (!el) {
+        return 0;
+      }
+      return el.offsetTop + this.calculateTopPosition(el.offsetParent);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
 
-            var _props = this.props,
-                children = _props.children,
-                element = _props.element,
-                hasMore = _props.hasMore,
-                initialLoad = _props.initialLoad,
-                isReverse = _props.isReverse,
-                loader = _props.loader,
-                loadMore = _props.loadMore,
-                pageStart = _props.pageStart,
-                threshold = _props.threshold,
-                useCapture = _props.useCapture,
-                useWindow = _props.useWindow,
-                props = _objectWithoutProperties(_props, ['children', 'element', 'hasMore', 'initialLoad', 'isReverse', 'loader', 'loadMore', 'pageStart', 'threshold', 'useCapture', 'useWindow']);
+      var _props = this.props,
+          children = _props.children,
+          element = _props.element,
+          hasMore = _props.hasMore,
+          initialLoad = _props.initialLoad,
+          isReverse = _props.isReverse,
+          loader = _props.loader,
+          loadMore = _props.loadMore,
+          pageStart = _props.pageStart,
+          threshold = _props.threshold,
+          useCapture = _props.useCapture,
+          useWindow = _props.useWindow,
+          props = _objectWithoutProperties(_props, ['children', 'element', 'hasMore', 'initialLoad', 'isReverse', 'loader', 'loadMore', 'pageStart', 'threshold', 'useCapture', 'useWindow']);
 
-            props.ref = function (node) {
-                _this2.scrollComponent = node;
-            };
+      props.ref = function (node) {
+        _this2.scrollComponent = node;
+      };
 
-            return _react2.default.createElement(element, props, children, hasMore && (loader || this._defaultLoader));
-        }
-    }, {
-        key: 'calculateTopPosition',
-        value: function calculateTopPosition(el) {
-            if (!el) {
-                return 0;
-            }
-            return el.offsetTop + this.calculateTopPosition(el.offsetParent);
-        }
-    }, {
-        key: 'scrollListener',
-        value: function scrollListener() {
-            var el = this.scrollComponent;
-            var scrollEl = window;
+      return _react2.default.createElement(element, props, children, hasMore && (loader || this.defaultLoader));
+    }
+  }]);
 
-            var offset = void 0;
-            if (this.props.useWindow) {
-                var scrollTop = scrollEl.pageYOffset !== undefined ? scrollEl.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-                if (this.props.isReverse) offset = scrollTop;else offset = this.calculateTopPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
-            } else {
-                if (this.props.isReverse) offset = el.parentNode.scrollTop;else offset = el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
-            }
-
-            if (offset < Number(this.props.threshold)) {
-                this.detachScrollListener();
-                // Call loadMore after detachScrollListener to allow for non-async loadMore functions
-                if (typeof this.props.loadMore == 'function') {
-                    this.props.loadMore(this.pageLoaded += 1);
-                }
-            }
-        }
-    }, {
-        key: 'attachScrollListener',
-        value: function attachScrollListener() {
-            if (!this.props.hasMore) {
-                return;
-            }
-
-            var scrollEl = window;
-            if (this.props.useWindow == false) {
-                scrollEl = this.scrollComponent.parentNode;
-            }
-
-            scrollEl.addEventListener('scroll', this.scrollListener, this.props.useCapture);
-            scrollEl.addEventListener('resize', this.scrollListener, this.props.useCapture);
-
-            if (this.props.initialLoad) {
-                this.scrollListener();
-            }
-        }
-    }, {
-        key: 'detachScrollListener',
-        value: function detachScrollListener() {
-            var scrollEl = window;
-            if (this.props.useWindow == false) {
-                scrollEl = this.scrollComponent.parentNode;
-            }
-
-            scrollEl.removeEventListener('scroll', this.scrollListener, this.props.useCapture);
-            scrollEl.removeEventListener('resize', this.scrollListener, this.props.useCapture);
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            this.detachScrollListener();
-        }
-
-        // Set a defaut loader for all your `InfiniteScroll` components
-
-    }, {
-        key: 'setDefaultLoader',
-        value: function setDefaultLoader(loader) {
-            this._defaultLoader = loader;
-        }
-    }]);
-
-    return InfiniteScroll;
+  return InfiniteScroll;
 }(_react.Component);
 
 InfiniteScroll.propTypes = {
-    element: _propTypes2.default.string,
-    hasMore: _propTypes2.default.bool,
-    initialLoad: _propTypes2.default.bool,
-    isReverse: _propTypes2.default.bool,
-    loadMore: _propTypes2.default.func.isRequired,
-    pageStart: _propTypes2.default.number,
-    threshold: _propTypes2.default.number,
-    useCapture: _propTypes2.default.bool,
-    useWindow: _propTypes2.default.bool
+  element: _propTypes2.default.string,
+  hasMore: _propTypes2.default.bool,
+  initialLoad: _propTypes2.default.bool,
+  isReverse: _propTypes2.default.bool,
+  loadMore: _propTypes2.default.func.isRequired,
+  pageStart: _propTypes2.default.number,
+  threshold: _propTypes2.default.number,
+  useCapture: _propTypes2.default.bool,
+  useWindow: _propTypes2.default.bool,
+  children: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.array]).isRequired,
+  loader: _propTypes2.default.object
 };
 InfiniteScroll.defaultProps = {
-    element: 'div',
-    hasMore: false,
-    initialLoad: true,
-    pageStart: 0,
-    threshold: 250,
-    useWindow: true,
-    isReverse: false,
-    useCapture: false
+  element: 'div',
+  hasMore: false,
+  initialLoad: true,
+  pageStart: 0,
+  threshold: 250,
+  useWindow: true,
+  isReverse: false,
+  useCapture: false,
+  loader: null
 };
 exports.default = InfiniteScroll;
 module.exports = exports['default'];
