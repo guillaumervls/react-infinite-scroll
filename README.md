@@ -17,7 +17,7 @@ Infinitely load content using a React Component. This fork maintains a simple, l
 npm install react-infinite-scroller --save
 ```
 ```
-yarn add install react-infinite-scroller
+yarn add react-infinite-scroller
 ```
 
 ## How to use
