@@ -1,6 +1,6 @@
 {
   "name": "react-infinite-scroller",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Infinite scroll component for React in ES6",
   "main": "index.js",
   "jsnext:main": "src/InfiniteScroll.js",
@@ -26,7 +26,6 @@
     "url": "https://github.com/CassetteRocks/react-infinite-scroller/issues"
   },
   "devDependencies": {
-    "babel": "^6.23.0",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",
