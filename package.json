@@ -49,13 +49,13 @@
     "jsdom": "^10.0.0",
     "mocha": "^3.3.0",
     "nyc": "^10.2.0",
-    "prop-types": "^15.5.8",
     "react": "^0.14.0 || ^15.0.1",
     "react-addons-test-utils": "^0.14.0 || ^15.0.1",
     "react-dom": "^0.14.0 || ^15.0.1",
     "sinon": "^2.1.0"
   },
   "peerDependencies": {
+    "prop-types": "^15.5.8",
     "react": "^0.14.0 || ^15.0.1"
   }
 }
