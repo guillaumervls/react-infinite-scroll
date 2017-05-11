@@ -12,7 +12,7 @@
     "build": "mkdir -p dist && babel src/InfiniteScroll.js --out-file dist/InfiniteScroll.js",
     "prepublish": "npm run build",
     "test": "nyc npm run spec",
-    "spec": "./node_modules/.bin/_mocha -R spec ./test/test_helper.js --recursive test/*_test.js",
+    "spec": "_mocha -R spec ./test/test_helper.js --recursive test/*_test.js",
     "lint": "eslint src test"
   },
   "keywords": [
@@ -24,6 +24,12 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/CassetteRocks/react-infinite-scroller/issues"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.8"
+  },
+  "peerDependencies": {
+    "react": "^0.14.9 || ^15.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
@@ -49,13 +55,9 @@
     "jsdom": "^10.0.0",
     "mocha": "^3.3.0",
     "nyc": "^10.2.0",
-    "react": "^0.14.0 || ^15.0.1",
-    "react-addons-test-utils": "^0.14.0 || ^15.0.1",
-    "react-dom": "^0.14.0 || ^15.0.1",
+    "react": "^0.14.9 || ^15.3.0",
+    "react-addons-test-utils": "^0.14.8 || ^15.3.0",
+    "react-dom": "^0.14.9 || ^15.3.0",
     "sinon": "^2.1.0"
-  },
-  "peerDependencies": {
-    "prop-types": "^15.5.8",
-    "react": "^0.14.0 || ^15.0.1"
   }
 }
