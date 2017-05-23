@@ -144,11 +144,18 @@ export default class InfiniteScroll extends Component {
       this.scrollComponent = node;
     };
 
+    const childrenArray = [children];
+    if (hasMore) {
+      if (loader) {
+        childrenArray.push(loader);
+      } else if (this.defaultLoader) {
+        childrenArray.push(this.defaultLoader);
+      }
+    }
     return React.createElement(
         element,
         props,
-        children,
-        hasMore && (loader || this.defaultLoader),
+        ...childrenArray,
     );
   }
 }

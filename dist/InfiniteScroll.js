@@ -149,7 +149,15 @@ var InfiniteScroll = function (_Component) {
         _this2.scrollComponent = node;
       };
 
-      return _react2.default.createElement(element, props, children, hasMore && (loader || this.defaultLoader));
+      var childrenArray = [children];
+      if (hasMore) {
+        if (loader) {
+          childrenArray.push(loader);
+        } else if (this.defaultLoader) {
+          childrenArray.push(this.defaultLoader);
+        }
+      }
+      return _react2.default.createElement.apply(_react2.default, [element, props].concat(childrenArray));
     }
   }]);
 
