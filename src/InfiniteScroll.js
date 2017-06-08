@@ -145,14 +145,14 @@ export default class InfiniteScroll extends Component {
     };
 
     let childElements = [children, hasMore && (loader || this.defaultLoader)];
-    if(isReverse) {
+    if (isReverse) {
       childElements = childElements.reverse();
     }
 
     return React.createElement(
         element,
         props,
-        childElements
+        childElements,
     );
   }
 }
