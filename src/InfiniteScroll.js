@@ -144,6 +144,15 @@ export default class InfiniteScroll extends Component {
       this.scrollComponent = node;
     };
 
+    if (isReverse) {
+      return React.createElement(
+          element,
+          props,
+          hasMore && (loader || this.defaultLoader),
+          children,
+      );
+    }
+
     return React.createElement(
         element,
         props,

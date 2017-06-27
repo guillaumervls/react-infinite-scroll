@@ -149,6 +149,10 @@ var InfiniteScroll = function (_Component) {
         _this2.scrollComponent = node;
       };
 
+      if (isReverse) {
+        return _react2.default.createElement(element, props, hasMore && (loader || this.defaultLoader), children);
+      }
+
       return _react2.default.createElement(element, props, children, hasMore && (loader || this.defaultLoader));
     }
   }]);
