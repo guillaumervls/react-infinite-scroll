@@ -152,9 +152,9 @@ var InfiniteScroll = function (_Component) {
       var childrenArray = [children];
       if (hasMore) {
         if (loader) {
-          childrenArray.push(loader);
+          isReverse ? childrenArray.unshift(loader) : childrenArray.push(loader);
         } else if (this.defaultLoader) {
-          childrenArray.push(this.defaultLoader);
+          isReverse ? childrenArray.unshift(this.defaultLoader) : childrenArray.push(this.defaultLoader);
         }
       }
       return _react2.default.createElement.apply(_react2.default, [element, props].concat(childrenArray));
