@@ -5,21 +5,20 @@ import PropTypes from 'prop-types';
 
 export default class InfiniteScroll extends Component {
   static propTypes = {
+    children: PropTypes
+      .oneOfType([PropTypes.object, PropTypes.array])
+      .isRequired,
     element: PropTypes.string,
     hasMore: PropTypes.bool,
     initialLoad: PropTypes.bool,
     isReverse: PropTypes.bool,
+    loader: PropTypes.object,
     loadMore: PropTypes.func.isRequired,
     pageStart: PropTypes.number,
     ref: PropTypes.func,
     threshold: PropTypes.number,
     useCapture: PropTypes.bool,
     useWindow: PropTypes.bool,
-    children: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.array,
-    ]).isRequired,
-    loader: PropTypes.object,
   };
 
   static defaultProps = {
@@ -27,6 +26,7 @@ export default class InfiniteScroll extends Component {
     hasMore: false,
     initialLoad: true,
     pageStart: 0,
+    ref: null,
     threshold: 250,
     useWindow: true,
     isReverse: false,
@@ -144,7 +144,7 @@ export default class InfiniteScroll extends Component {
 
     props.ref = (node) => {
       this.scrollComponent = node;
-      if(ref) {
+      if (ref) {
         ref(node);
       }
     };
