@@ -134,6 +134,7 @@ export default class InfiniteScroll extends Component {
       loader,
       loadMore,
       pageStart,
+      ref,
       threshold,
       useCapture,
       useWindow,
@@ -142,6 +143,9 @@ export default class InfiniteScroll extends Component {
 
     props.ref = (node) => {
       this.scrollComponent = node;
+      if(ref) {
+        ref(node);
+      }
     };
 
     const childrenArray = [children];
