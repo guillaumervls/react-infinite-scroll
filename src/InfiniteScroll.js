@@ -11,6 +11,7 @@ export default class InfiniteScroll extends Component {
     isReverse: PropTypes.bool,
     loadMore: PropTypes.func.isRequired,
     pageStart: PropTypes.number,
+    ref: PropTypes.func,
     threshold: PropTypes.number,
     useCapture: PropTypes.bool,
     useWindow: PropTypes.bool,
