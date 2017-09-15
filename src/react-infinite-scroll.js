@@ -24,6 +24,7 @@ module.exports = function (React) {
       this.attachScrollListener();
     },
     componentDidUpdate: function () {
+      this.detachScrollListener();
       this.attachScrollListener();
     },
     render: function () {
