@@ -29,7 +29,7 @@
     "prop-types": "^15.5.8"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15.3.0"
+    "react": "^0.14.9 || ^16.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
