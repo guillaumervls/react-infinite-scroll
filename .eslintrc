@@ -3,6 +3,8 @@
   "plugins": ["react", "prettier"],
   "globals": {
     "document": true,
-    "window": true
+    "window": true,
+    "describe": true,
+    "it": true
   }
 }
