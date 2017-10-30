@@ -2,6 +2,4 @@ node_modules
 npm-debug.log
 .DS_Store
 .nyc_output
-.vscode
 coverage
-
