@@ -17,14 +17,8 @@ describe('InfiniteScroll component', () => {
 
     const wrapper = mount(
       <div>
-        <InfiniteScroll
-          pageStart={0}
-          loadMore={loadMore}
-          hasMore={false}
-        >
-          <div className="om-product__list">
-            {children}
-          </div>
+        <InfiniteScroll pageStart={0} loadMore={loadMore} hasMore={false}>
+          <div className="om-product__list">{children}</div>
         </InfiniteScroll>
       </div>,
     );
@@ -43,14 +37,8 @@ describe('InfiniteScroll component', () => {
     );
     mount(
       <div>
-        <InfiniteScroll
-          pageStart={0}
-          loadMore={loadMore}
-          hasMore={false}
-        >
-          <div className="om-product__list">
-            {children}
-          </div>
+        <InfiniteScroll pageStart={0} loadMore={loadMore} hasMore={false}>
+          <div className="om-product__list">{children}</div>
         </InfiniteScroll>
       </div>,
     );
@@ -78,9 +66,7 @@ describe('InfiniteScroll component', () => {
           useWindow={false}
           threshold={0}
         >
-          <div className="om-product__list">
-            {children}
-          </div>
+          <div className="om-product__list">{children}</div>
         </InfiniteScroll>
       </div>,
     );

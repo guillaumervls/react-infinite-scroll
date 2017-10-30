@@ -13,7 +13,14 @@
     "prepublish": "npm run build",
     "test": "nyc npm run spec",
     "spec": "_mocha -R spec ./test/test_helper.js --recursive test/*_test.js",
-    "lint": "eslint src test"
+    "lint": "node_modules/.bin/eslint ./src ./test",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "node_modules/.bin/eslint ./src ./test --fix --max-warnings 0 --no-ignore",
+      "git add"
+    ]
   },
   "keywords": [
     "infinite",
@@ -46,15 +53,18 @@
     "chai": "^3.5.0",
     "chai-enzyme": "^0.6.1",
     "enzyme": "^2.8.2",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3",
+    "eslint": "^4.10.0",
+    "eslint-config-last": "^0.0.3",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-react": "^7.4.0",
+    "husky": "^0.14.3",
     "istanbul": "^0.4.5",
     "jsdom": "^10.0.0",
+    "lint-staged": "^4.3.0",
     "mocha": "^3.3.0",
     "nyc": "^10.2.0",
+    "prettier": "^1.7.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-test-renderer": "^15.5.4",
