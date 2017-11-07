@@ -183,14 +183,14 @@ var InfiniteScroll = (function(_Component) {
 
         var offset = void 0;
         if (this.props.useWindow) {
+          var doc =
+            document.documentElement ||
+            document.body.parentNode ||
+            document.body;
           var scrollTop =
             scrollEl.pageYOffset !== undefined
               ? scrollEl.pageYOffset
-              : (
-                  document.documentElement ||
-                  document.body.parentNode ||
-                  document.body
-                ).scrollTop;
+              : doc.scrollTop;
           if (this.props.isReverse) {
             offset = scrollTop;
           } else {
@@ -234,16 +234,28 @@ var InfiniteScroll = (function(_Component) {
           children = _props.children,
           element = _props.element,
           hasMore = _props.hasMore,
+          initialLoad = _props.initialLoad,
           isReverse = _props.isReverse,
           loader = _props.loader,
+          loadMore = _props.loadMore,
+          pageStart = _props.pageStart,
           ref = _props.ref,
+          threshold = _props.threshold,
+          useCapture = _props.useCapture,
+          useWindow = _props.useWindow,
           props = _objectWithoutProperties(_props, [
             'children',
             'element',
             'hasMore',
+            'initialLoad',
             'isReverse',
             'loader',
+            'loadMore',
+            'pageStart',
             'ref',
+            'threshold',
+            'useCapture',
+            'useWindow',
           ]);
 
         props.ref = function(node) {

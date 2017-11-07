@@ -105,14 +105,12 @@ export default class InfiniteScroll extends Component {
 
     let offset;
     if (this.props.useWindow) {
+      const doc =
+        document.documentElement || document.body.parentNode || document.body;
       const scrollTop =
         scrollEl.pageYOffset !== undefined
           ? scrollEl.pageYOffset
-          : (
-              document.documentElement ||
-              document.body.parentNode ||
-              document.body
-            ).scrollTop;
+          : doc.scrollTop;
       if (this.props.isReverse) {
         offset = scrollTop;
       } else {
