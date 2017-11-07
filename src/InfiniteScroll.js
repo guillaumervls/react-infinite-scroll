@@ -108,7 +108,8 @@ export default class InfiniteScroll extends Component {
       const scrollTop =
         scrollEl.pageYOffset !== undefined
           ? scrollEl.pageYOffset
-          : (document.documentElement ||
+          : (
+              document.documentElement ||
               document.body.parentNode ||
               document.body
             ).scrollTop;
@@ -147,9 +148,15 @@ export default class InfiniteScroll extends Component {
       children,
       element,
       hasMore,
+      initialLoad,
       isReverse,
       loader,
+      loadMore,
+      pageStart,
       ref,
+      threshold,
+      useCapture,
+      useWindow,
       ...props
     } = this.props;
 
