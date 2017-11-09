@@ -1,12 +1,9 @@
-import React, {
-  Component,
-} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class InfiniteScroll extends Component {
   static propTypes = {
-    children: PropTypes
-      .oneOfType([PropTypes.object, PropTypes.array])
+    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
       .isRequired,
     element: PropTypes.string,
     hasMore: PropTypes.bool,
@@ -64,8 +61,16 @@ export default class InfiniteScroll extends Component {
       scrollEl = this.scrollComponent.parentNode;
     }
 
-    scrollEl.removeEventListener('scroll', this.scrollListener, this.props.useCapture);
-    scrollEl.removeEventListener('resize', this.scrollListener, this.props.useCapture);
+    scrollEl.removeEventListener(
+      'scroll',
+      this.scrollListener,
+      this.props.useCapture,
+    );
+    scrollEl.removeEventListener(
+      'resize',
+      this.scrollListener,
+      this.props.useCapture,
+    );
   }
 
   attachScrollListener() {
@@ -78,8 +83,16 @@ export default class InfiniteScroll extends Component {
       scrollEl = this.scrollComponent.parentNode;
     }
 
-    scrollEl.addEventListener('scroll', this.scrollListener, this.props.useCapture);
-    scrollEl.addEventListener('resize', this.scrollListener, this.props.useCapture);
+    scrollEl.addEventListener(
+      'scroll',
+      this.scrollListener,
+      this.props.useCapture,
+    );
+    scrollEl.addEventListener(
+      'resize',
+      this.scrollListener,
+      this.props.useCapture,
+    );
 
     if (this.props.initialLoad) {
       this.scrollListener();
@@ -92,28 +105,31 @@ export default class InfiniteScroll extends Component {
 
     let offset;
     if (this.props.useWindow) {
-      const scrollTop = (scrollEl.pageYOffset !== undefined) ?
-       scrollEl.pageYOffset :
-       (document.documentElement || document.body.parentNode || document.body).scrollTop;
+      const doc =
+        document.documentElement || document.body.parentNode || document.body;
+      const scrollTop =
+        scrollEl.pageYOffset !== undefined
+          ? scrollEl.pageYOffset
+          : doc.scrollTop;
       if (this.props.isReverse) {
         offset = scrollTop;
       } else {
-        offset = this.calculateTopPosition(el) +
-                     (el.offsetHeight -
-                     scrollTop -
-                     window.innerHeight);
+        offset =
+          this.calculateTopPosition(el) +
+          (el.offsetHeight - scrollTop - window.innerHeight);
       }
     } else if (this.props.isReverse) {
       offset = el.parentNode.scrollTop;
     } else {
-      offset = el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
+      offset =
+        el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
     }
 
     if (offset < Number(this.props.threshold)) {
       this.detachScrollListener();
       // Call loadMore after detachScrollListener to allow for non-async loadMore functions
       if (typeof this.props.loadMore === 'function') {
-        this.props.loadMore(this.pageLoaded += 1);
+        this.props.loadMore((this.pageLoaded += 1));
       }
     }
   }
@@ -142,7 +158,7 @@ export default class InfiniteScroll extends Component {
       ...props
     } = this.props;
 
-    props.ref = (node) => {
+    props.ref = node => {
       this.scrollComponent = node;
       if (ref) {
         ref(node);
@@ -154,15 +170,11 @@ export default class InfiniteScroll extends Component {
       if (loader) {
         isReverse ? childrenArray.unshift(loader) : childrenArray.push(loader);
       } else if (this.defaultLoader) {
-        isReverse ?
-          childrenArray.unshift(this.defaultLoader) :
-          childrenArray.push(this.defaultLoader);
+        isReverse
+          ? childrenArray.unshift(this.defaultLoader)
+          : childrenArray.push(this.defaultLoader);
       }
     }
-    return React.createElement(
-        element,
-        props,
-        ...childrenArray,
-    );
+    return React.createElement(element, props, ...childrenArray);
   }
 }

@@ -1,21 +1,31 @@
 {
-  "extends": "eslint-config-airbnb",
-  "env": {
-    "mocha": true,
-    "browser": true
-  },
+  "extends": [
+    "last",
+    "prettier",
+    "prettier/react",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "react",
+    "prettier"
+  ],
   "globals": {
-    "expect": true,
+    "document": true,
     "window": true,
-    "document": true
+    "describe": true,
+    "it": true,
+    "module": true,
+    "exports": true,
+    "require": true
   },
   "rules": {
-    "padded-blocks": 0,
-    "no-use-before-define": [2, "nofunc"],
-    "no-unused-expressions": 0,
-    "import/no-extraneous-dependencies": [ "error", { "devDependencies": true }],
-    "react/forbid-prop-types": [1, { "forbid": [] }],
-    "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }]
-  },
-  "parser": "babel-eslint"
+    "no-unused-vars": [
+      "off",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": false
+      }
+    ]
+  }
 }
