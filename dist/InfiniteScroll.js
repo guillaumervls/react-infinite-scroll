@@ -117,6 +117,7 @@ var InfiniteScroll = (function(_Component) {
       key: 'componentWillUnmount',
       value: function componentWillUnmount() {
         this.detachScrollListener();
+        this.detachMousewheelListener();
       },
 
       // Set a defaut loader for all your `InfiniteScroll` components
@@ -128,8 +129,8 @@ var InfiniteScroll = (function(_Component) {
       },
     },
     {
-      key: 'detachScrollListener',
-      value: function detachScrollListener() {
+      key: 'detachMousewheelListener',
+      value: function detachMousewheelListener() {
         var scrollEl = window;
         if (this.props.useWindow === false) {
           scrollEl = this.scrollComponent.parentNode;
@@ -140,6 +141,16 @@ var InfiniteScroll = (function(_Component) {
           this.mousewheelListener,
           this.props.useCapture,
         );
+      },
+    },
+    {
+      key: 'detachScrollListener',
+      value: function detachScrollListener() {
+        var scrollEl = window;
+        if (this.props.useWindow === false) {
+          scrollEl = this.scrollComponent.parentNode;
+        }
+
         scrollEl.removeEventListener(
           'scroll',
           this.scrollListener,
