@@ -136,6 +136,11 @@ var InfiniteScroll = (function(_Component) {
         }
 
         scrollEl.removeEventListener(
+          'mousewheel',
+          this.mousewheelListener,
+          this.props.useCapture,
+        );
+        scrollEl.removeEventListener(
           'scroll',
           this.scrollListener,
           this.props.useCapture,
@@ -160,6 +165,11 @@ var InfiniteScroll = (function(_Component) {
         }
 
         scrollEl.addEventListener(
+          'mousewheel',
+          this.mousewheelListener,
+          this.props.useCapture,
+        );
+        scrollEl.addEventListener(
           'scroll',
           this.scrollListener,
           this.props.useCapture,
@@ -172,6 +182,16 @@ var InfiniteScroll = (function(_Component) {
 
         if (this.props.initialLoad) {
           this.scrollListener();
+        }
+      },
+    },
+    {
+      key: 'mousewheelListener',
+      value: function mousewheelListener(e) {
+        // Prevents Chrome hangups
+        // See: https://stackoverflow.com/questions/47524205/random-high-content-download-time-in-chrome/47684257#47684257
+        if (e.deltaY === 1) {
+          e.preventDefault();
         }
       },
     },
