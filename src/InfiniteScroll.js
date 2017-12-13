@@ -48,6 +48,7 @@ export default class InfiniteScroll extends Component {
 
   componentWillUnmount() {
     this.detachScrollListener();
+    this.detachMousewheelListener();
   }
 
   // Set a defaut loader for all your `InfiniteScroll` components
@@ -55,7 +56,7 @@ export default class InfiniteScroll extends Component {
     this.defaultLoader = loader;
   }
 
-  detachScrollListener() {
+  detachMousewheelListener() {
     let scrollEl = window;
     if (this.props.useWindow === false) {
       scrollEl = this.scrollComponent.parentNode;
@@ -66,6 +67,14 @@ export default class InfiniteScroll extends Component {
       this.mousewheelListener,
       this.props.useCapture,
     );
+  }
+
+  detachScrollListener() {
+    let scrollEl = window;
+    if (this.props.useWindow === false) {
+      scrollEl = this.scrollComponent.parentNode;
+    }
+
     scrollEl.removeEventListener(
       'scroll',
       this.scrollListener,
