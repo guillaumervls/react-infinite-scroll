@@ -117,6 +117,7 @@ var InfiniteScroll = (function(_Component) {
       key: 'componentWillUnmount',
       value: function componentWillUnmount() {
         this.detachScrollListener();
+        this.detachMousewheelListener();
       },
 
       // Set a defaut loader for all your `InfiniteScroll` components
@@ -125,6 +126,21 @@ var InfiniteScroll = (function(_Component) {
       key: 'setDefaultLoader',
       value: function setDefaultLoader(loader) {
         this.defaultLoader = loader;
+      },
+    },
+    {
+      key: 'detachMousewheelListener',
+      value: function detachMousewheelListener() {
+        var scrollEl = window;
+        if (this.props.useWindow === false) {
+          scrollEl = this.scrollComponent.parentNode;
+        }
+
+        scrollEl.removeEventListener(
+          'mousewheel',
+          this.mousewheelListener,
+          this.props.useCapture,
+        );
       },
     },
     {
@@ -160,6 +176,11 @@ var InfiniteScroll = (function(_Component) {
         }
 
         scrollEl.addEventListener(
+          'mousewheel',
+          this.mousewheelListener,
+          this.props.useCapture,
+        );
+        scrollEl.addEventListener(
           'scroll',
           this.scrollListener,
           this.props.useCapture,
@@ -172,6 +193,16 @@ var InfiniteScroll = (function(_Component) {
 
         if (this.props.initialLoad) {
           this.scrollListener();
+        }
+      },
+    },
+    {
+      key: 'mousewheelListener',
+      value: function mousewheelListener(e) {
+        // Prevents Chrome hangups
+        // See: https://stackoverflow.com/questions/47524205/random-high-content-download-time-in-chrome/47684257#47684257
+        if (e.deltaY === 1) {
+          e.preventDefault();
         }
       },
     },

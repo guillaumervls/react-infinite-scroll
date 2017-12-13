@@ -48,11 +48,25 @@ export default class InfiniteScroll extends Component {
 
   componentWillUnmount() {
     this.detachScrollListener();
+    this.detachMousewheelListener();
   }
 
   // Set a defaut loader for all your `InfiniteScroll` components
   setDefaultLoader(loader) {
     this.defaultLoader = loader;
+  }
+
+  detachMousewheelListener() {
+    let scrollEl = window;
+    if (this.props.useWindow === false) {
+      scrollEl = this.scrollComponent.parentNode;
+    }
+
+    scrollEl.removeEventListener(
+      'mousewheel',
+      this.mousewheelListener,
+      this.props.useCapture,
+    );
   }
 
   detachScrollListener() {
@@ -84,6 +98,11 @@ export default class InfiniteScroll extends Component {
     }
 
     scrollEl.addEventListener(
+      'mousewheel',
+      this.mousewheelListener,
+      this.props.useCapture,
+    );
+    scrollEl.addEventListener(
       'scroll',
       this.scrollListener,
       this.props.useCapture,
@@ -96,6 +115,14 @@ export default class InfiniteScroll extends Component {
 
     if (this.props.initialLoad) {
       this.scrollListener();
+    }
+  }
+
+  mousewheelListener(e) {
+    // Prevents Chrome hangups
+    // See: https://stackoverflow.com/questions/47524205/random-high-content-download-time-in-chrome/47684257#47684257
+    if (e.deltaY === 1) {
+      e.preventDefault();
     }
   }
 
