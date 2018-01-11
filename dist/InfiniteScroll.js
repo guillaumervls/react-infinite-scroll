@@ -308,10 +308,7 @@ var InfiniteScroll = (function(_Component) {
               : childrenArray.push(this.defaultLoader);
           }
         }
-        return _react2.default.createElement.apply(
-          _react2.default,
-          [element, props].concat(childrenArray),
-        );
+        return _react2.default.createElement(element, props, childrenArray);
       },
     },
   ]);
