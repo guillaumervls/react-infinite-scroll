@@ -34,7 +34,7 @@ import InfiniteScroll from 'react-infinite-scroller';
     pageStart={0}
     loadMore={loadFunc}
     hasMore={true || false}
-    loader={<div className="loader">Loading ...</div>}
+    loader={<div className="loader" key={0}>Loading ...</div>}
 >
     {items} // <-- This is the content you want to load
 </InfiniteScroll>
@@ -48,7 +48,7 @@ import InfiniteScroll from 'react-infinite-scroller';
         pageStart={0}
         loadMore={loadFunc}
         hasMore={true || false}
-        loader={<div className="loader">Loading ...</div>}
+        loader={<div className="loader" key={0}>Loading ...</div>}
         useWindow={false}
     >
         {items}
