@@ -317,15 +317,12 @@ var InfiniteScroll = (function(_Component) {
 })(_react.Component);
 
 InfiniteScroll.propTypes = {
-  children: _propTypes2.default.oneOfType([
-    _propTypes2.default.object,
-    _propTypes2.default.array,
-  ]).isRequired,
+  children: _propTypes2.default.node.isRequired,
   element: _propTypes2.default.string,
   hasMore: _propTypes2.default.bool,
   initialLoad: _propTypes2.default.bool,
   isReverse: _propTypes2.default.bool,
-  loader: _propTypes2.default.object,
+  loader: _propTypes2.default.node,
   loadMore: _propTypes2.default.func.isRequired,
   pageStart: _propTypes2.default.number,
   ref: _propTypes2.default.func,
