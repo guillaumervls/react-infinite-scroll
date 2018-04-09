@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 
 export default class InfiniteScroll extends Component {
   static propTypes = {
-    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
-      .isRequired,
+    children: PropTypes.node.isRequired,
     element: PropTypes.string,
     hasMore: PropTypes.bool,
     initialLoad: PropTypes.bool,
     isReverse: PropTypes.bool,
-    loader: PropTypes.object,
+    loader: PropTypes.node,
     loadMore: PropTypes.func.isRequired,
     pageStart: PropTypes.number,
     ref: PropTypes.func,
