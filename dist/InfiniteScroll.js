@@ -318,7 +318,7 @@ var InfiniteScroll = (function(_Component) {
 
 InfiniteScroll.propTypes = {
   children: _propTypes2.default.node.isRequired,
-  element: _propTypes2.default.string,
+  element: _propTypes2.default.node,
   hasMore: _propTypes2.default.bool,
   initialLoad: _propTypes2.default.bool,
   isReverse: _propTypes2.default.bool,
