@@ -1,0 +1,31 @@
+{
+  "extends": [
+    "last",
+    "prettier",
+    "prettier/react",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "react",
+    "prettier"
+  ],
+  "globals": {
+    "document": true,
+    "window": true,
+    "describe": true,
+    "it": true,
+    "module": true,
+    "exports": true,
+    "require": true
+  },
+  "rules": {
+    "no-unused-vars": [
+      "off",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": false
+      }
+    ]
+  }
+}
