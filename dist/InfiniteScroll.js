@@ -148,7 +148,7 @@ var InfiniteScroll = (function(_Component) {
       value: function detachScrollListener() {
         var scrollEl = window;
         if (this.props.useWindow === false) {
-          scrollEl = this.scrollComponent.parentNode;
+          scrollEl = this.getParentElement(this.scrollComponent);
         }
 
         scrollEl.removeEventListener(
@@ -164,15 +164,30 @@ var InfiniteScroll = (function(_Component) {
       },
     },
     {
+      key: 'getParentElement',
+      value: function getParentElement(el) {
+        return el.parentNode;
+      },
+    },
+    {
+      key: 'filterProps',
+      value: function filterProps(props) {
+        return props;
+      },
+    },
+    {
       key: 'attachScrollListener',
       value: function attachScrollListener() {
-        if (!this.props.hasMore) {
+        if (
+          !this.props.hasMore ||
+          !this.getParentElement(this.scrollComponent)
+        ) {
           return;
         }
 
         var scrollEl = window;
         if (this.props.useWindow === false) {
-          scrollEl = this.scrollComponent.parentNode;
+          scrollEl = this.getParentElement(this.scrollComponent);
         }
 
         scrollEl.addEventListener(
@@ -211,6 +226,7 @@ var InfiniteScroll = (function(_Component) {
       value: function scrollListener() {
         var el = this.scrollComponent;
         var scrollEl = window;
+        var parentNode = this.getParentElement(el);
 
         var offset = void 0;
         if (this.props.useWindow) {
@@ -230,15 +246,14 @@ var InfiniteScroll = (function(_Component) {
               (el.offsetHeight - scrollTop - window.innerHeight);
           }
         } else if (this.props.isReverse) {
-          offset = el.parentNode.scrollTop;
+          offset = parentNode.scrollTop;
         } else {
           offset =
-            el.scrollHeight -
-            el.parentNode.scrollTop -
-            el.parentNode.clientHeight;
+            el.scrollHeight - parentNode.scrollTop - parentNode.clientHeight;
         }
 
-        if (offset < Number(this.props.threshold)) {
+        // Here we make sure the element is visible as well as checking the offset
+        if (offset < Number(this.props.threshold) && el.offsetParent !== null) {
           this.detachScrollListener();
           // Call loadMore after detachScrollListener to allow for non-async loadMore functions
           if (typeof this.props.loadMore === 'function') {
@@ -261,20 +276,21 @@ var InfiniteScroll = (function(_Component) {
       value: function render() {
         var _this2 = this;
 
-        var _props = this.props,
-          children = _props.children,
-          element = _props.element,
-          hasMore = _props.hasMore,
-          initialLoad = _props.initialLoad,
-          isReverse = _props.isReverse,
-          loader = _props.loader,
-          loadMore = _props.loadMore,
-          pageStart = _props.pageStart,
-          ref = _props.ref,
-          threshold = _props.threshold,
-          useCapture = _props.useCapture,
-          useWindow = _props.useWindow,
-          props = _objectWithoutProperties(_props, [
+        var renderProps = this.filterProps(this.props);
+
+        var children = renderProps.children,
+          element = renderProps.element,
+          hasMore = renderProps.hasMore,
+          initialLoad = renderProps.initialLoad,
+          isReverse = renderProps.isReverse,
+          loader = renderProps.loader,
+          loadMore = renderProps.loadMore,
+          pageStart = renderProps.pageStart,
+          ref = renderProps.ref,
+          threshold = renderProps.threshold,
+          useCapture = renderProps.useCapture,
+          useWindow = renderProps.useWindow,
+          props = _objectWithoutProperties(renderProps, [
             'children',
             'element',
             'hasMore',
