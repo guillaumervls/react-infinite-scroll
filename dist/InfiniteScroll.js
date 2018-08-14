@@ -166,7 +166,7 @@ var InfiniteScroll = (function(_Component) {
     {
       key: 'getParentElement',
       value: function getParentElement(el) {
-        return el.parentNode;
+        return el && el.parentNode;
       },
     },
     {
@@ -241,9 +241,7 @@ var InfiniteScroll = (function(_Component) {
           if (this.props.isReverse) {
             offset = scrollTop;
           } else {
-            offset =
-              this.calculateTopPosition(el) +
-              (el.offsetHeight - scrollTop - window.innerHeight);
+            offset = this.calculateOffset(el, scrollTop);
           }
         } else if (this.props.isReverse) {
           offset = parentNode.scrollTop;
@@ -253,13 +251,30 @@ var InfiniteScroll = (function(_Component) {
         }
 
         // Here we make sure the element is visible as well as checking the offset
-        if (offset < Number(this.props.threshold) && el.offsetParent !== null) {
+        if (
+          offset < Number(this.props.threshold) &&
+          el &&
+          el.offsetParent !== null
+        ) {
           this.detachScrollListener();
           // Call loadMore after detachScrollListener to allow for non-async loadMore functions
           if (typeof this.props.loadMore === 'function') {
             this.props.loadMore((this.pageLoaded += 1));
           }
         }
+      },
+    },
+    {
+      key: 'calculateOffset',
+      value: function calculateOffset(el, scrollTop) {
+        if (!el) {
+          return 0;
+        }
+
+        return (
+          this.calculateTopPosition(el) +
+          (el.offsetHeight - scrollTop - window.innerHeight)
+        );
       },
     },
     {
