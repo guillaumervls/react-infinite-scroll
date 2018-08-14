@@ -75,4 +75,28 @@ describe('InfiniteScroll component', () => {
     InfiniteScroll.prototype.attachScrollListener.restore();
     InfiniteScroll.prototype.scrollListener.restore();
   });
+
+  it('should handle when the scrollElement is removed from the DOM', () => {
+    const loadMore = stub();
+
+    const wrapper = mount(
+      <div>
+        <InfiniteScroll pageStart={0} loadMore={loadMore} hasMore={false}>
+          <div className="child-component">Child Text</div>
+        </InfiniteScroll>
+      </div>,
+    );
+
+    const component = wrapper.find(InfiniteScroll);
+
+    // The component has now mounted, but the scrollComponent is null
+    component.instance().scrollComponent = null;
+
+    // Invoke the scroll listener which depends on the scrollComponent to
+    // verify it executes properly, and safely navigates when the
+    // scrollComponent is null.
+    component.instance().scrollListener();
+
+    expect(wrapper.text()).to.contain('Child Text');
+  });
 });
