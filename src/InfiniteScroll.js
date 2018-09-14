@@ -87,7 +87,7 @@ export default class InfiniteScroll extends Component {
   }
 
   getParentElement(el) {
-    return el.parentNode;
+    return el && el.parentNode;
   }
 
   filterProps(props) {
@@ -149,9 +149,7 @@ export default class InfiniteScroll extends Component {
       if (this.props.isReverse) {
         offset = scrollTop;
       } else {
-        offset =
-          this.calculateTopPosition(el) +
-          (el.offsetHeight - scrollTop - window.innerHeight);
+        offset = this.calculateOffset(el, scrollTop);
       }
     } else if (this.props.isReverse) {
       offset = parentNode.scrollTop;
@@ -160,13 +158,27 @@ export default class InfiniteScroll extends Component {
     }
 
     // Here we make sure the element is visible as well as checking the offset
-    if (offset < Number(this.props.threshold) && el.offsetParent !== null) {
+    if (
+      offset < Number(this.props.threshold) &&
+      (el && el.offsetParent !== null)
+    ) {
       this.detachScrollListener();
       // Call loadMore after detachScrollListener to allow for non-async loadMore functions
       if (typeof this.props.loadMore === 'function') {
         this.props.loadMore((this.pageLoaded += 1));
       }
     }
+  }
+
+  calculateOffset(el, scrollTop) {
+    if (!el) {
+      return 0;
+    }
+
+    return (
+      this.calculateTopPosition(el) +
+      (el.offsetHeight - scrollTop - window.innerHeight)
+    );
   }
 
   calculateTopPosition(el) {
