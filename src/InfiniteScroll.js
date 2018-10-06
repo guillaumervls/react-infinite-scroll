@@ -12,7 +12,7 @@ export default class InfiniteScroll extends Component {
     loadMore: PropTypes.func.isRequired,
     pageStart: PropTypes.number,
     ref: PropTypes.func,
-    scrollParent: PropTypes.element,
+    getScrollParent: PropTypes.func,
     threshold: PropTypes.number,
     useCapture: PropTypes.bool,
     useWindow: PropTypes.bool,
@@ -29,7 +29,7 @@ export default class InfiniteScroll extends Component {
     isReverse: false,
     useCapture: false,
     loader: null,
-    scrollParent: null,
+    getScrollParent: null,
   };
 
   constructor(props) {
@@ -89,7 +89,7 @@ export default class InfiniteScroll extends Component {
   }
 
   getParentElement(el) {
-    const scrollParent = this.props.scrollParent;
+    const scrollParent = this.props.getScrollParent();
     if (scrollParent != null) {
       return scrollParent;
     }
@@ -211,7 +211,7 @@ export default class InfiniteScroll extends Component {
       threshold,
       useCapture,
       useWindow,
-      scrollParent,
+      getScrollParent,
       ...props
     } = renderProps;
 

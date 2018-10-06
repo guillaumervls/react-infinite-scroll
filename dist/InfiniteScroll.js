@@ -166,7 +166,7 @@ var InfiniteScroll = (function(_Component) {
     {
       key: 'getParentElement',
       value: function getParentElement(el) {
-        var scrollParent = this.props.scrollParent;
+        var scrollParent = this.props.getScrollParent();
         if (scrollParent != null) {
           return scrollParent;
         }
@@ -308,6 +308,7 @@ var InfiniteScroll = (function(_Component) {
           threshold = renderProps.threshold,
           useCapture = renderProps.useCapture,
           useWindow = renderProps.useWindow,
+          getScrollParent = renderProps.getScrollParent,
           props = _objectWithoutProperties(renderProps, [
             'children',
             'element',
@@ -321,6 +322,7 @@ var InfiniteScroll = (function(_Component) {
             'threshold',
             'useCapture',
             'useWindow',
+            'getScrollParent',
           ]);
 
         props.ref = function(node) {
@@ -360,7 +362,7 @@ InfiniteScroll.propTypes = {
   loadMore: _propTypes2.default.func.isRequired,
   pageStart: _propTypes2.default.number,
   ref: _propTypes2.default.func,
-  scrollParent: _propTypes2.default.element,
+  getScrollParent: _propTypes2.default.func,
   threshold: _propTypes2.default.number,
   useCapture: _propTypes2.default.bool,
   useWindow: _propTypes2.default.bool,
@@ -376,7 +378,7 @@ InfiniteScroll.defaultProps = {
   isReverse: false,
   useCapture: false,
   loader: null,
-  scrollParent: null,
+  getScrollParent: null,
 };
 exports.default = InfiniteScroll;
 module.exports = exports['default'];
