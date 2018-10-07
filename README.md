@@ -69,7 +69,7 @@ You can define a custom `parentNode` element to base the scroll calulations on.
             hasMore={true || false}
             loader={<div className="loader" key={0}>Loading ...</div>}
             useWindow={false}
-            getScrollParent={() => return this.scrollParentRef}
+            getScrollParent={() => this.scrollParentRef}
         >
             {items}
         </InfiniteScroll>
