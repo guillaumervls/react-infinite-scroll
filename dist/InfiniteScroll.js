@@ -166,7 +166,8 @@ var InfiniteScroll = (function(_Component) {
     {
       key: 'getParentElement',
       value: function getParentElement(el) {
-        var scrollParent = this.props.getScrollParent();
+        var scrollParent =
+          this.props.getScrollParent && this.props.getScrollParent();
         if (scrollParent != null) {
           return scrollParent;
         }
