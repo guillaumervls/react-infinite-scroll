@@ -166,6 +166,11 @@ var InfiniteScroll = (function(_Component) {
     {
       key: 'getParentElement',
       value: function getParentElement(el) {
+        var scrollParent =
+          this.props.getScrollParent && this.props.getScrollParent();
+        if (scrollParent != null) {
+          return scrollParent;
+        }
         return el && el.parentNode;
       },
     },
@@ -178,16 +183,15 @@ var InfiniteScroll = (function(_Component) {
     {
       key: 'attachScrollListener',
       value: function attachScrollListener() {
-        if (
-          !this.props.hasMore ||
-          !this.getParentElement(this.scrollComponent)
-        ) {
+        var parentElement = this.getParentElement(this.scrollComponent);
+
+        if (!this.props.hasMore || !parentElement) {
           return;
         }
 
         var scrollEl = window;
         if (this.props.useWindow === false) {
-          scrollEl = this.getParentElement(this.scrollComponent);
+          scrollEl = parentElement;
         }
 
         scrollEl.addEventListener(
@@ -305,6 +309,7 @@ var InfiniteScroll = (function(_Component) {
           threshold = renderProps.threshold,
           useCapture = renderProps.useCapture,
           useWindow = renderProps.useWindow,
+          getScrollParent = renderProps.getScrollParent,
           props = _objectWithoutProperties(renderProps, [
             'children',
             'element',
@@ -318,6 +323,7 @@ var InfiniteScroll = (function(_Component) {
             'threshold',
             'useCapture',
             'useWindow',
+            'getScrollParent',
           ]);
 
         props.ref = function(node) {
@@ -357,6 +363,7 @@ InfiniteScroll.propTypes = {
   loadMore: _propTypes2.default.func.isRequired,
   pageStart: _propTypes2.default.number,
   ref: _propTypes2.default.func,
+  getScrollParent: _propTypes2.default.func,
   threshold: _propTypes2.default.number,
   useCapture: _propTypes2.default.bool,
   useWindow: _propTypes2.default.bool,
@@ -372,6 +379,7 @@ InfiniteScroll.defaultProps = {
   isReverse: false,
   useCapture: false,
   loader: null,
+  getScrollParent: null,
 };
 exports.default = InfiniteScroll;
 module.exports = exports['default'];
