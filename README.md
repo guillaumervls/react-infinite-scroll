@@ -42,7 +42,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 ### DOM scroll events
 
-```html
+```js
 <div style="height:700px;overflow:auto;">
     <InfiniteScroll
         pageStart={0}
@@ -60,7 +60,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 You can define a custom `parentNode` element to base the scroll calulations on.
 
-```
+```js
 <div style="height:700px;overflow:auto;" ref={(ref) => this.scrollParentRef = ref}>
     <div>
         <InfiniteScroll
@@ -88,7 +88,7 @@ You can define a custom `parentNode` element to base the scroll calulations on.
 | `loadMore`       | `Function`    |            | A callback when more items are requested by the user. Receives a single parameter specifying the page to load e.g. `function handleLoadMore(page) { /* load more items here */ }` }|
 | `loader`         | `Component`   |            | A React component to render while more items are loading. The parent component must have a unique key prop. |
 | `pageStart`      | `Number`      | `0`        | The number of the first page to load, With the default of `0`, the first page is `1`.|
-| `getScrollParent`   | `Function`|           | Override method to return a different scroll listener if not the immediate parent. |
+| `getScrollParent`   | `Function`|           | Override method to return a different scroll listener if it's not the immediate parent of InfiniteScroll. |
 | `threshold`      | `Number`     | `250`      | The distance in pixels before the end of the items that will trigger a call to `loadMore`.|
 | `useCapture`     | `Boolean`     | `false`     | Proxy to the `useCapture` option of the added event listeners.|
 | `useWindow`      | `Boolean`     | `true`     | Add scroll listeners to the window, or else, the component's `parentNode`.|
