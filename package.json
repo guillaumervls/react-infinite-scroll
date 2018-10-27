@@ -9,7 +9,8 @@
     "url": "git://github.com/CassetteRocks/react-infinite-scroller.git"
   },
   "scripts": {
-    "build": "mkdir -p dist && babel src/InfiniteScroll.js --out-file dist/InfiniteScroll.js",
+    "build":
+      "mkdirp dist && babel src/InfiniteScroll.js --out-file dist/InfiniteScroll.js",
     "prepublish": "npm run build",
     "test": "nyc npm run spec",
     "spec": "_mocha -R spec ./test/test_helper.js --recursive test/*_test.js",
@@ -22,11 +23,7 @@
       "git add"
     ]
   },
-  "keywords": [
-    "infinite",
-    "scroll",
-    "react"
-  ],
+  "keywords": ["infinite", "scroll", "react"],
   "author": "CassetteRocks",
   "license": "MIT",
   "bugs": {
@@ -63,6 +60,7 @@
     "istanbul": "^0.4.5",
     "jsdom": "^10.0.0",
     "lint-staged": "^4.3.0",
+    "mkdirp": "^0.5.1",
     "mocha": "^3.3.0",
     "nyc": "^10.2.0",
     "prettier": "^1.7.4",
