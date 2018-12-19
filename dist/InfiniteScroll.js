@@ -96,6 +96,7 @@ var InfiniteScroll = (function(_Component) {
     );
 
     _this.scrollListener = _this.scrollListener.bind(_this);
+    _this.eventListenerOptions = _this.eventListenerOptions.bind(_this);
     return _this;
   }
 
@@ -104,6 +105,7 @@ var InfiniteScroll = (function(_Component) {
       key: 'componentDidMount',
       value: function componentDidMount() {
         this.pageLoaded = this.props.pageStart;
+        this.options = this.eventListenerOptions();
         this.attachScrollListener();
       },
     },
@@ -118,6 +120,39 @@ var InfiniteScroll = (function(_Component) {
       value: function componentWillUnmount() {
         this.detachScrollListener();
         this.detachMousewheelListener();
+      },
+    },
+    {
+      key: 'isPassiveSupported',
+      value: function isPassiveSupported() {
+        var passive = false;
+
+        var testOptions = {
+          get passive() {
+            passive = true;
+          },
+        };
+
+        try {
+          document.addEventListener('test', null, testOptions);
+        } catch (e) {
+          // ignore
+        }
+        return passive;
+      },
+    },
+    {
+      key: 'eventListenerOptions',
+      value: function eventListenerOptions() {
+        var options = false;
+
+        if (this.isPassiveSupported()) {
+          options = {
+            useCapture: this.props.useCapture,
+            passive: this.props.passive,
+          };
+        }
+        return options;
       },
 
       // Set a defaut loader for all your `InfiniteScroll` components
@@ -139,7 +174,7 @@ var InfiniteScroll = (function(_Component) {
         scrollEl.removeEventListener(
           'mousewheel',
           this.mousewheelListener,
-          this.props.useCapture,
+          this.options ? this.options : this.props.useCapture,
         );
       },
     },
@@ -154,12 +189,12 @@ var InfiniteScroll = (function(_Component) {
         scrollEl.removeEventListener(
           'scroll',
           this.scrollListener,
-          this.props.useCapture,
+          this.options ? this.options : this.props.useCapture,
         );
         scrollEl.removeEventListener(
           'resize',
           this.scrollListener,
-          this.props.useCapture,
+          this.options ? this.options : this.props.useCapture,
         );
       },
     },
@@ -197,17 +232,17 @@ var InfiniteScroll = (function(_Component) {
         scrollEl.addEventListener(
           'mousewheel',
           this.mousewheelListener,
-          this.props.useCapture,
+          this.options ? this.options : this.props.useCapture,
         );
         scrollEl.addEventListener(
           'scroll',
           this.scrollListener,
-          this.props.useCapture,
+          this.options ? this.options : this.props.useCapture,
         );
         scrollEl.addEventListener(
           'resize',
           this.scrollListener,
-          this.props.useCapture,
+          this.options ? this.options : this.props.useCapture,
         );
 
         if (this.props.initialLoad) {
@@ -367,6 +402,7 @@ InfiniteScroll.propTypes = {
   threshold: _propTypes2.default.number,
   useCapture: _propTypes2.default.bool,
   useWindow: _propTypes2.default.bool,
+  passive: _propTypes2.default.bool,
 };
 InfiniteScroll.defaultProps = {
   element: 'div',
@@ -380,6 +416,7 @@ InfiniteScroll.defaultProps = {
   useCapture: false,
   loader: null,
   getScrollParent: null,
+  passive: false,
 };
 exports.default = InfiniteScroll;
 module.exports = exports['default'];
