@@ -97,6 +97,7 @@ var InfiniteScroll = (function(_Component) {
 
     _this.scrollListener = _this.scrollListener.bind(_this);
     _this.eventListenerOptions = _this.eventListenerOptions.bind(_this);
+    _this.mousewheelListener = _this.mousewheelListener.bind(_this);
     return _this;
   }
 

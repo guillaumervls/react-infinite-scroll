@@ -39,6 +39,7 @@ export default class InfiniteScroll extends Component {
 
     this.scrollListener = this.scrollListener.bind(this);
     this.eventListenerOptions = this.eventListenerOptions.bind(this);
+    this.mousewheelListener = this.mousewheelListener.bind(this);
   }
 
   componentDidMount() {
