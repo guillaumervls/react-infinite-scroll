@@ -15,7 +15,7 @@ export default class InfiniteScroll extends Component {
     getScrollParent: PropTypes.func,
     threshold: PropTypes.number,
     useCapture: PropTypes.bool,
-    useWindow: PropTypes.bool,
+    useWindow: PropTypes.bool
   };
 
   static defaultProps = {
@@ -29,7 +29,7 @@ export default class InfiniteScroll extends Component {
     isReverse: false,
     useCapture: false,
     loader: null,
-    getScrollParent: null,
+    getScrollParent: null
   };
 
   constructor(props) {
@@ -74,7 +74,7 @@ export default class InfiniteScroll extends Component {
     scrollEl.removeEventListener(
       'mousewheel',
       this.mousewheelListener,
-      this.props.useCapture,
+      this.props.useCapture
     );
   }
 
@@ -87,12 +87,12 @@ export default class InfiniteScroll extends Component {
     scrollEl.removeEventListener(
       'scroll',
       this.scrollListener,
-      this.props.useCapture,
+      this.props.useCapture
     );
     scrollEl.removeEventListener(
       'resize',
       this.scrollListener,
-      this.props.useCapture,
+      this.props.useCapture
     );
   }
 
@@ -124,17 +124,17 @@ export default class InfiniteScroll extends Component {
     scrollEl.addEventListener(
       'mousewheel',
       this.mousewheelListener,
-      this.props.useCapture,
+      this.props.useCapture
     );
     scrollEl.addEventListener(
       'scroll',
       this.scrollListener,
-      this.props.useCapture,
+      this.props.useCapture
     );
     scrollEl.addEventListener(
       'resize',
       this.scrollListener,
-      this.props.useCapture,
+      this.props.useCapture
     );
 
     if (this.props.initialLoad) {

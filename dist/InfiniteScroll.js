@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
-  value: true,
+  value: true
 });
 
 var _createClass = (function() {
@@ -52,7 +52,7 @@ function _classCallCheck(instance, Constructor) {
 function _possibleConstructorReturn(self, call) {
   if (!self) {
     throw new ReferenceError(
-      "this hasn't been initialised - super() hasn't been called",
+      "this hasn't been initialised - super() hasn't been called"
     );
   }
   return call && (typeof call === 'object' || typeof call === 'function')
@@ -64,7 +64,7 @@ function _inherits(subClass, superClass) {
   if (typeof superClass !== 'function' && superClass !== null) {
     throw new TypeError(
       'Super expression must either be null or a function, not ' +
-        typeof superClass,
+        typeof superClass
     );
   }
   subClass.prototype = Object.create(superClass && superClass.prototype, {
@@ -72,8 +72,8 @@ function _inherits(subClass, superClass) {
       value: subClass,
       enumerable: false,
       writable: true,
-      configurable: true,
-    },
+      configurable: true
+    }
   });
   if (superClass)
     Object.setPrototypeOf
@@ -91,8 +91,8 @@ var InfiniteScroll = (function(_Component) {
       this,
       (InfiniteScroll.__proto__ || Object.getPrototypeOf(InfiniteScroll)).call(
         this,
-        props,
-      ),
+        props
+      )
     );
 
     _this.scrollListener = _this.scrollListener.bind(_this);
@@ -105,7 +105,7 @@ var InfiniteScroll = (function(_Component) {
       value: function componentDidMount() {
         this.pageLoaded = this.props.pageStart;
         this.attachScrollListener();
-      },
+      }
     },
     {
       key: 'componentDidUpdate',
@@ -119,14 +119,14 @@ var InfiniteScroll = (function(_Component) {
           this.loadMore = false;
         }
         this.attachScrollListener();
-      },
+      }
     },
     {
       key: 'componentWillUnmount',
       value: function componentWillUnmount() {
         this.detachScrollListener();
         this.detachMousewheelListener();
-      },
+      }
 
       // Set a defaut loader for all your `InfiniteScroll` components
     },
@@ -134,7 +134,7 @@ var InfiniteScroll = (function(_Component) {
       key: 'setDefaultLoader',
       value: function setDefaultLoader(loader) {
         this.defaultLoader = loader;
-      },
+      }
     },
     {
       key: 'detachMousewheelListener',
@@ -147,9 +147,9 @@ var InfiniteScroll = (function(_Component) {
         scrollEl.removeEventListener(
           'mousewheel',
           this.mousewheelListener,
-          this.props.useCapture,
+          this.props.useCapture
         );
-      },
+      }
     },
     {
       key: 'detachScrollListener',
@@ -162,14 +162,14 @@ var InfiniteScroll = (function(_Component) {
         scrollEl.removeEventListener(
           'scroll',
           this.scrollListener,
-          this.props.useCapture,
+          this.props.useCapture
         );
         scrollEl.removeEventListener(
           'resize',
           this.scrollListener,
-          this.props.useCapture,
+          this.props.useCapture
         );
-      },
+      }
     },
     {
       key: 'getParentElement',
@@ -180,13 +180,13 @@ var InfiniteScroll = (function(_Component) {
           return scrollParent;
         }
         return el && el.parentNode;
-      },
+      }
     },
     {
       key: 'filterProps',
       value: function filterProps(props) {
         return props;
-      },
+      }
     },
     {
       key: 'attachScrollListener',
@@ -205,23 +205,23 @@ var InfiniteScroll = (function(_Component) {
         scrollEl.addEventListener(
           'mousewheel',
           this.mousewheelListener,
-          this.props.useCapture,
+          this.props.useCapture
         );
         scrollEl.addEventListener(
           'scroll',
           this.scrollListener,
-          this.props.useCapture,
+          this.props.useCapture
         );
         scrollEl.addEventListener(
           'resize',
           this.scrollListener,
-          this.props.useCapture,
+          this.props.useCapture
         );
 
         if (this.props.initialLoad) {
           this.scrollListener();
         }
-      },
+      }
     },
     {
       key: 'mousewheelListener',
@@ -231,7 +231,7 @@ var InfiniteScroll = (function(_Component) {
         if (e.deltaY === 1) {
           e.preventDefault();
         }
-      },
+      }
     },
     {
       key: 'scrollListener',
@@ -277,7 +277,7 @@ var InfiniteScroll = (function(_Component) {
             this.loadMore = true;
           }
         }
-      },
+      }
     },
     {
       key: 'calculateOffset',
@@ -290,7 +290,7 @@ var InfiniteScroll = (function(_Component) {
           this.calculateTopPosition(el) +
           (el.offsetHeight - scrollTop - window.innerHeight)
         );
-      },
+      }
     },
     {
       key: 'calculateTopPosition',
@@ -299,7 +299,7 @@ var InfiniteScroll = (function(_Component) {
           return 0;
         }
         return el.offsetTop + this.calculateTopPosition(el.offsetParent);
-      },
+      }
     },
     {
       key: 'render',
@@ -334,7 +334,7 @@ var InfiniteScroll = (function(_Component) {
             'threshold',
             'useCapture',
             'useWindow',
-            'getScrollParent',
+            'getScrollParent'
           ]);
 
         props.ref = function(node) {
@@ -357,8 +357,8 @@ var InfiniteScroll = (function(_Component) {
           }
         }
         return _react2.default.createElement(element, props, childrenArray);
-      },
-    },
+      }
+    }
   ]);
 
   return InfiniteScroll;
@@ -377,7 +377,7 @@ InfiniteScroll.propTypes = {
   getScrollParent: _propTypes2.default.func,
   threshold: _propTypes2.default.number,
   useCapture: _propTypes2.default.bool,
-  useWindow: _propTypes2.default.bool,
+  useWindow: _propTypes2.default.bool
 };
 InfiniteScroll.defaultProps = {
   element: 'div',
@@ -390,7 +390,7 @@ InfiniteScroll.defaultProps = {
   isReverse: false,
   useCapture: false,
   loader: null,
-  getScrollParent: null,
+  getScrollParent: null
 };
 exports.default = InfiniteScroll;
 module.exports = exports['default'];

@@ -20,7 +20,7 @@ describe('InfiniteScroll component', () => {
         <InfiniteScroll pageStart={0} loadMore={loadMore} hasMore={false}>
           <div className="om-product__list">{children}</div>
         </InfiniteScroll>
-      </div>,
+      </div>
     );
     expect(wrapper.find('.child-class').length).to.equal(3);
   });
@@ -40,7 +40,7 @@ describe('InfiniteScroll component', () => {
         <InfiniteScroll pageStart={0} loadMore={loadMore} hasMore={false}>
           <div className="om-product__list">{children}</div>
         </InfiniteScroll>
-      </div>,
+      </div>
     );
     expect(InfiniteScroll.prototype.componentDidMount.callCount).to.equal(1);
     InfiniteScroll.prototype.componentDidMount.restore();
@@ -68,7 +68,7 @@ describe('InfiniteScroll component', () => {
         >
           <div className="om-product__list">{children}</div>
         </InfiniteScroll>
-      </div>,
+      </div>
     );
     expect(InfiniteScroll.prototype.attachScrollListener.callCount).to.equal(1);
     expect(InfiniteScroll.prototype.scrollListener.callCount).to.equal(1);
@@ -84,7 +84,7 @@ describe('InfiniteScroll component', () => {
         <InfiniteScroll pageStart={0} loadMore={loadMore} hasMore={false}>
           <div className="child-component">Child Text</div>
         </InfiniteScroll>
-      </div>,
+      </div>
     );
 
     const component = wrapper.find(InfiniteScroll);
