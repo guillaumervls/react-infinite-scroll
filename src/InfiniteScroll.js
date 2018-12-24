@@ -69,7 +69,7 @@ export default class InfiniteScroll extends Component {
     const testOptions = {
       get passive() {
         passive = true;
-      },
+      }
     };
 
     try {
@@ -87,7 +87,7 @@ export default class InfiniteScroll extends Component {
     if (this.isPassiveSupported()) {
       options = {
         useCapture: this.props.useCapture,
-        passive: true,
+        passive: true
       };
     }
     return options;
