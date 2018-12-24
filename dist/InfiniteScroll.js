@@ -129,7 +129,7 @@ var InfiniteScroll = (function(_Component) {
       value: function componentWillUnmount() {
         this.detachScrollListener();
         this.detachMousewheelListener();
-      },
+      }
     },
     {
       key: 'isPassiveSupported',
@@ -139,30 +139,32 @@ var InfiniteScroll = (function(_Component) {
         var testOptions = {
           get passive() {
             passive = true;
-          },
+          }
         };
 
         try {
           document.addEventListener('test', null, testOptions);
+          document.removeEventListener('test', null, testOptions);
         } catch (e) {
           // ignore
         }
         return passive;
-      },
+      }
     },
     {
       key: 'eventListenerOptions',
       value: function eventListenerOptions() {
-        var options = false;
+        var options = this.props.useCapture;
 
         if (this.isPassiveSupported()) {
           options = {
             useCapture: this.props.useCapture,
-            passive: this.props.passive,
+            passive: true
           };
         }
         return options;
       }
+
       // Set a defaut loader for all your `InfiniteScroll` components
     },
     {
@@ -240,12 +242,12 @@ var InfiniteScroll = (function(_Component) {
         scrollEl.addEventListener(
           'mousewheel',
           this.mousewheelListener,
-          this.options ? this.options : this.props.useCapture,
+          this.options ? this.options : this.props.useCapture
         );
         scrollEl.addEventListener(
           'scroll',
           this.scrollListener,
-          this.options ? this.options : this.props.useCapture,
+          this.options ? this.options : this.props.useCapture
         );
         scrollEl.addEventListener(
           'resize',
@@ -263,10 +265,7 @@ var InfiniteScroll = (function(_Component) {
       value: function mousewheelListener(e) {
         // Prevents Chrome hangups
         // See: https://stackoverflow.com/questions/47524205/random-high-content-download-time-in-chrome/47684257#47684257
-        if (
-          e.deltaY === 1 &&
-          (!this.props.passive || !this.isPassiveSupported())
-        ) {
+        if (e.deltaY === 1 && !this.isPassiveSupported()) {
           e.preventDefault();
         }
       }
