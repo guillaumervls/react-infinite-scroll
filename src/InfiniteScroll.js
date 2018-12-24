@@ -15,7 +15,7 @@ export default class InfiniteScroll extends Component {
     getScrollParent: PropTypes.func,
     threshold: PropTypes.number,
     useCapture: PropTypes.bool,
-    useWindow: PropTypes.bool,
+    useWindow: PropTypes.bool
   };
 
   static defaultProps = {
@@ -29,7 +29,7 @@ export default class InfiniteScroll extends Component {
     isReverse: false,
     useCapture: false,
     loader: null,
-    getScrollParent: null,
+    getScrollParent: null
   };
 
   constructor(props) {
@@ -47,6 +47,14 @@ export default class InfiniteScroll extends Component {
   }
 
   componentDidUpdate() {
+    if (this.props.isReverse && this.loadMore) {
+      const parentElement = this.getParentElement(this.scrollComponent);
+      parentElement.scrollTop =
+        parentElement.scrollHeight -
+        this.beforeScrollHeight +
+        this.beforeScrollTop;
+      this.loadMore = false;
+    }
     this.attachScrollListener();
   }
 
@@ -99,7 +107,7 @@ export default class InfiniteScroll extends Component {
     scrollEl.removeEventListener(
       'mousewheel',
       this.mousewheelListener,
-      this.options ? this.options : this.props.useCapture,
+      this.options ? this.options : this.props.useCapture
     );
   }
 
@@ -112,12 +120,12 @@ export default class InfiniteScroll extends Component {
     scrollEl.removeEventListener(
       'scroll',
       this.scrollListener,
-      this.options ? this.options : this.props.useCapture,
+      this.options ? this.options : this.props.useCapture
     );
     scrollEl.removeEventListener(
       'resize',
       this.scrollListener,
-      this.options ? this.options : this.props.useCapture,
+      this.options ? this.options : this.props.useCapture
     );
   }
 
@@ -149,17 +157,17 @@ export default class InfiniteScroll extends Component {
     scrollEl.addEventListener(
       'mousewheel',
       this.mousewheelListener,
-      this.options ? this.options : this.props.useCapture,
+      this.options ? this.options : this.props.useCapture
     );
     scrollEl.addEventListener(
       'scroll',
       this.scrollListener,
-      this.options ? this.options : this.props.useCapture,
+      this.options ? this.options : this.props.useCapture
     );
     scrollEl.addEventListener(
       'resize',
       this.scrollListener,
-      this.options ? this.options : this.props.useCapture,
+      this.options ? this.options : this.props.useCapture
     );
 
     if (this.props.initialLoad) {
@@ -205,9 +213,12 @@ export default class InfiniteScroll extends Component {
       (el && el.offsetParent !== null)
     ) {
       this.detachScrollListener();
+      this.beforeScrollHeight = parentNode.scrollHeight;
+      this.beforeScrollTop = parentNode.scrollTop;
       // Call loadMore after detachScrollListener to allow for non-async loadMore functions
       if (typeof this.props.loadMore === 'function') {
         this.props.loadMore((this.pageLoaded += 1));
+        this.loadMore = true;
       }
     }
   }
