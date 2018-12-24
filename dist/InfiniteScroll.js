@@ -96,6 +96,8 @@ var InfiniteScroll = (function(_Component) {
     );
 
     _this.scrollListener = _this.scrollListener.bind(_this);
+    _this.eventListenerOptions = _this.eventListenerOptions.bind(_this);
+    _this.mousewheelListener = _this.mousewheelListener.bind(_this);
     return _this;
   }
 
@@ -104,6 +106,7 @@ var InfiniteScroll = (function(_Component) {
       key: 'componentDidMount',
       value: function componentDidMount() {
         this.pageLoaded = this.props.pageStart;
+        this.options = this.eventListenerOptions();
         this.attachScrollListener();
       }
     },
@@ -126,8 +129,40 @@ var InfiniteScroll = (function(_Component) {
       value: function componentWillUnmount() {
         this.detachScrollListener();
         this.detachMousewheelListener();
-      }
+      },
+    },
+    {
+      key: 'isPassiveSupported',
+      value: function isPassiveSupported() {
+        var passive = false;
 
+        var testOptions = {
+          get passive() {
+            passive = true;
+          },
+        };
+
+        try {
+          document.addEventListener('test', null, testOptions);
+        } catch (e) {
+          // ignore
+        }
+        return passive;
+      },
+    },
+    {
+      key: 'eventListenerOptions',
+      value: function eventListenerOptions() {
+        var options = false;
+
+        if (this.isPassiveSupported()) {
+          options = {
+            useCapture: this.props.useCapture,
+            passive: this.props.passive,
+          };
+        }
+        return options;
+      }
       // Set a defaut loader for all your `InfiniteScroll` components
     },
     {
@@ -147,7 +182,7 @@ var InfiniteScroll = (function(_Component) {
         scrollEl.removeEventListener(
           'mousewheel',
           this.mousewheelListener,
-          this.props.useCapture
+          this.options ? this.options : this.props.useCapture
         );
       }
     },
@@ -162,12 +197,12 @@ var InfiniteScroll = (function(_Component) {
         scrollEl.removeEventListener(
           'scroll',
           this.scrollListener,
-          this.props.useCapture
+          this.options ? this.options : this.props.useCapture
         );
         scrollEl.removeEventListener(
           'resize',
           this.scrollListener,
-          this.props.useCapture
+          this.options ? this.options : this.props.useCapture
         );
       }
     },
@@ -205,17 +240,17 @@ var InfiniteScroll = (function(_Component) {
         scrollEl.addEventListener(
           'mousewheel',
           this.mousewheelListener,
-          this.props.useCapture
+          this.options ? this.options : this.props.useCapture,
         );
         scrollEl.addEventListener(
           'scroll',
           this.scrollListener,
-          this.props.useCapture
+          this.options ? this.options : this.props.useCapture,
         );
         scrollEl.addEventListener(
           'resize',
           this.scrollListener,
-          this.props.useCapture
+          this.options ? this.options : this.props.useCapture
         );
 
         if (this.props.initialLoad) {
@@ -228,7 +263,10 @@ var InfiniteScroll = (function(_Component) {
       value: function mousewheelListener(e) {
         // Prevents Chrome hangups
         // See: https://stackoverflow.com/questions/47524205/random-high-content-download-time-in-chrome/47684257#47684257
-        if (e.deltaY === 1) {
+        if (
+          e.deltaY === 1 &&
+          (!this.props.passive || !this.isPassiveSupported())
+        ) {
           e.preventDefault();
         }
       }

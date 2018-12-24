@@ -36,10 +36,13 @@ export default class InfiniteScroll extends Component {
     super(props);
 
     this.scrollListener = this.scrollListener.bind(this);
+    this.eventListenerOptions = this.eventListenerOptions.bind(this);
+    this.mousewheelListener = this.mousewheelListener.bind(this);
   }
 
   componentDidMount() {
     this.pageLoaded = this.props.pageStart;
+    this.options = this.eventListenerOptions();
     this.attachScrollListener();
   }
 
@@ -60,6 +63,36 @@ export default class InfiniteScroll extends Component {
     this.detachMousewheelListener();
   }
 
+  isPassiveSupported() {
+    let passive = false;
+
+    const testOptions = {
+      get passive() {
+        passive = true;
+      }
+    };
+
+    try {
+      document.addEventListener('test', null, testOptions);
+      document.removeEventListener('test', null, testOptions);
+    } catch (e) {
+      // ignore
+    }
+    return passive;
+  }
+
+  eventListenerOptions() {
+    let options = this.props.useCapture;
+
+    if (this.isPassiveSupported()) {
+      options = {
+        useCapture: this.props.useCapture,
+        passive: true
+      };
+    }
+    return options;
+  }
+
   // Set a defaut loader for all your `InfiniteScroll` components
   setDefaultLoader(loader) {
     this.defaultLoader = loader;
@@ -74,7 +107,7 @@ export default class InfiniteScroll extends Component {
     scrollEl.removeEventListener(
       'mousewheel',
       this.mousewheelListener,
-      this.props.useCapture
+      this.options ? this.options : this.props.useCapture
     );
   }
 
@@ -87,12 +120,12 @@ export default class InfiniteScroll extends Component {
     scrollEl.removeEventListener(
       'scroll',
       this.scrollListener,
-      this.props.useCapture
+      this.options ? this.options : this.props.useCapture
     );
     scrollEl.removeEventListener(
       'resize',
       this.scrollListener,
-      this.props.useCapture
+      this.options ? this.options : this.props.useCapture
     );
   }
 
@@ -124,17 +157,17 @@ export default class InfiniteScroll extends Component {
     scrollEl.addEventListener(
       'mousewheel',
       this.mousewheelListener,
-      this.props.useCapture
+      this.options ? this.options : this.props.useCapture
     );
     scrollEl.addEventListener(
       'scroll',
       this.scrollListener,
-      this.props.useCapture
+      this.options ? this.options : this.props.useCapture
     );
     scrollEl.addEventListener(
       'resize',
       this.scrollListener,
-      this.props.useCapture
+      this.options ? this.options : this.props.useCapture
     );
 
     if (this.props.initialLoad) {
@@ -145,7 +178,7 @@ export default class InfiniteScroll extends Component {
   mousewheelListener(e) {
     // Prevents Chrome hangups
     // See: https://stackoverflow.com/questions/47524205/random-high-content-download-time-in-chrome/47684257#47684257
-    if (e.deltaY === 1) {
+    if (e.deltaY === 1 && !this.isPassiveSupported()) {
       e.preventDefault();
     }
   }
