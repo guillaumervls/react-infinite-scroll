@@ -16,7 +16,6 @@ export default class InfiniteScroll extends Component {
     threshold: PropTypes.number,
     useCapture: PropTypes.bool,
     useWindow: PropTypes.bool,
-    passive: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -31,7 +30,6 @@ export default class InfiniteScroll extends Component {
     useCapture: false,
     loader: null,
     getScrollParent: null,
-    passive: false,
   };
 
   constructor(props) {
@@ -68,6 +66,7 @@ export default class InfiniteScroll extends Component {
 
     try {
       document.addEventListener('test', null, testOptions);
+      document.removeEventListener('test', null, testOptions);
     } catch (e) {
       // ignore
     }
@@ -80,7 +79,7 @@ export default class InfiniteScroll extends Component {
     if (this.isPassiveSupported()) {
       options = {
         useCapture: this.props.useCapture,
-        passive: this.props.passive,
+        passive: true,
       };
     }
     return options;
@@ -171,7 +170,7 @@ export default class InfiniteScroll extends Component {
   mousewheelListener(e) {
     // Prevents Chrome hangups
     // See: https://stackoverflow.com/questions/47524205/random-high-content-download-time-in-chrome/47684257#47684257
-    if (e.deltaY === 1 && (!this.props.passive || !this.isPassiveSupported())) {
+    if (e.deltaY === 1 && !this.isPassiveSupported()) {
       e.preventDefault();
     }
   }
