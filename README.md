@@ -81,6 +81,7 @@ You can define a custom `parentNode` element to base the scroll calulations on.
 
 | Name              | Required | Type         | Default   | Description                                                                                                                                                                         |
 | :---------------- | :------- | :----------- | :-------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`        | Yes      | `Node`   |           | Anything that can be rendered (same as PropType's Node) |
 | `loadMore`        | Yes      | `Function`   |           | A callback when more items are requested by the user. Receives a single parameter specifying the page to load e.g. `function handleLoadMore(page) { /* load more items here */ }` } |
 | `element`         |          | `Component`  | `'div'`   | Name of the element that the component should render as.                                                                                                                            |
 | `hasMore`         |          | `Boolean`    | `false`   | Whether there are more items to be loaded. Event listeners are removed if `false`.                                                                                                  |
