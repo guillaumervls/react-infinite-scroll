@@ -161,6 +161,10 @@ var InfiniteScroll = (function(_Component) {
             useCapture: this.props.useCapture,
             passive: true
           };
+        } else {
+          options = {
+            passive: false
+          };
         }
         return options;
       }
