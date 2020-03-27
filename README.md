@@ -79,16 +79,17 @@ You can define a custom `parentNode` element to base the scroll calulations on.
 
 ## Props
 
-| Name             | Type          | Default    | Description|
-|:----             |:----          |:----       |:----|
-| `element`        | `Component`      | `'div'`    | Name of the element that the component should render as.|
-| `hasMore`        | `Boolean`     | `false`    | Whether there are more items to be loaded. Event listeners are removed if `false`.|
-| `initialLoad`    | `Boolean`     | `true`     | Whether the component should load the first set of items.|
-| `isReverse`      | `Boolean`     | `false`    | Whether new items should be loaded when user scrolls to the top of the scrollable area.|
-| `loadMore`       | `Function`    |            | A callback when more items are requested by the user. Receives a single parameter specifying the page to load e.g. `function handleLoadMore(page) { /* load more items here */ }` }|
-| `loader`         | `Component`   |            | A React component to render while more items are loading. The parent component must have a unique key prop. |
-| `pageStart`      | `Number`      | `0`        | The number of the first page to load, With the default of `0`, the first page is `1`.|
-| `getScrollParent`   | `Function`|           | Override method to return a different scroll listener if it's not the immediate parent of InfiniteScroll. |
-| `threshold`      | `Number`     | `250`      | The distance in pixels before the end of the items that will trigger a call to `loadMore`.|
-| `useCapture`     | `Boolean`     | `false`     | Proxy to the `useCapture` option of the added event listeners.|
-| `useWindow`      | `Boolean`     | `true`     | Add scroll listeners to the window, or else, the component's `parentNode`.|
+| Name              | Required | Type         | Default   | Description                                                                                                                                                                         |
+| :---------------- | :------- | :----------- | :-------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`        | Yes      | `Node`   |           | Anything that can be rendered (same as PropType's Node) |
+| `loadMore`        | Yes      | `Function`   |           | A callback when more items are requested by the user. Receives a single parameter specifying the page to load e.g. `function handleLoadMore(page) { /* load more items here */ }` } |
+| `element`         |          | `Component`  | `'div'`   | Name of the element that the component should render as.                                                                                                                            |
+| `hasMore`         |          | `Boolean`    | `false`   | Whether there are more items to be loaded. Event listeners are removed if `false`.                                                                                                  |
+| `initialLoad`     |          | `Boolean`    | `true`    | Whether the component should load the first set of items.                                                                                                                           |
+| `isReverse`       |          | `Boolean`    | `false`   | Whether new items should be loaded when user scrolls to the top of the scrollable area.                                                                                             |
+| `loader`          |          | `Component`  |           | A React component to render while more items are loading. The parent component must have a unique key prop.                                                                         |
+| `pageStart`       |          | `Number`     | `0`       | The number of the first page to load, With the default of `0`, the first page is `1`.                                                                                               |
+| `getScrollParent` |          | `Function`   |           | Override method to return a different scroll listener if it's not the immediate parent of InfiniteScroll.                                                                           |
+| `threshold`       |          | `Number`     | `250`     | The distance in pixels before the end of the items that will trigger a call to `loadMore`.                                                                                          |
+| `useCapture`      |          | `Boolean`    | `false`   | Proxy to the `useCapture` option of the added event listeners.                                                                                                                      |
+| `useWindow`       |          | `Boolean`    | `true`    | Add scroll listeners to the window, or else, the component's `parentNode`.                                                                                                          |
