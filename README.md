@@ -35,6 +35,7 @@ import InfiniteScroll from 'react-infinite-scroller';
     loadMore={loadFunc}
     hasMore={true || false}
     loader={<div className="loader" key={0}>Loading ...</div>}
+    initialLoad={initialLoad} // <-- Should initially be true, then should be updated to false inside the loadFunc call
 >
     {items} // <-- This is the content you want to load
 </InfiniteScroll>
@@ -49,6 +50,7 @@ import InfiniteScroll from 'react-infinite-scroller';
         loadMore={loadFunc}
         hasMore={true || false}
         loader={<div className="loader" key={0}>Loading ...</div>}
+        initialLoad={initialLoad}
         useWindow={false}
     >
         {items}
@@ -68,6 +70,7 @@ You can define a custom `parentNode` element to base the scroll calulations on.
             loadMore={loadFunc}
             hasMore={true || false}
             loader={<div className="loader" key={0}>Loading ...</div>}
+            initialLoad={initialLoad}
             useWindow={false}
             getScrollParent={() => this.scrollParentRef}
         >
