@@ -208,7 +208,8 @@ export default class InfiniteScroll extends Component {
     } else if (this.props.isReverse) {
       offset = parentNode.scrollTop;
     } else {
-      offset = el.scrollHeight - parentNode.scrollTop - parentNode.clientHeight;
+      // fix issuse https://github.com/danbovey/react-infinite-scroller/issues/137
+      offset = this.calculateOffset(el, parentNode.scrollTop);
     }
 
     // Here we make sure the element is visible as well as checking the offset
